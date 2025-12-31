@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180" width="300" height="180">
+  <defs>
+    <!-- Import a web font similar to the original -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Small roof/chimney element at top -->
+  <rect x="143" y="12" width="14" height="6" fill="#A85050" rx="1"/>
+
+  <!-- House silhouette arches - pointed/gothic arch shape -->
+  <g transform="translate(150, 125)">
+    <!-- Outermost arch - coral/red -->
+    <path d="M -95 5 Q -95 -50 0 -100 Q 95 -50 95 5" fill="none" stroke="#D4736B" stroke-width="10" stroke-linecap="round"/>
+    <!-- Second arch - beige/light -->
+    <path d="M -80 5 Q -80 -42 0 -85 Q 80 -42 80 5" fill="none" stroke="#C4B8AC" stroke-width="10" stroke-linecap="round"/>
+    <!-- Third arch - coral/salmon -->
+    <path d="M -65 5 Q -65 -34 0 -70 Q 65 -34 65 5" fill="none" stroke="#C87068" stroke-width="10" stroke-linecap="round"/>
+    <!-- Fourth arch - warm gray -->
+    <path d="M -50 5 Q -50 -26 0 -55 Q 50 -26 50 5" fill="none" stroke="#8A7E74" stroke-width="10" stroke-linecap="round"/>
+    <!-- Fifth arch - darker gray -->
+    <path d="M -35 5 Q -35 -18 0 -40 Q 35 -18 35 5" fill="none" stroke="#605850" stroke-width="10" stroke-linecap="round"/>
+    <!-- Innermost arch - darkest -->
+    <path d="M -20 5 Q -20 -10 0 -25 Q 20 -10 20 5" fill="none" stroke="#484040" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <!-- Text "Bienes Raices" matching original script style -->
+  <text x="150" y="165" text-anchor="middle" font-family="'Dancing Script', 'Brush Script MT', cursive" font-size="30" fill="#A85858" font-weight="500">Bienes Raices</text>
+</svg>

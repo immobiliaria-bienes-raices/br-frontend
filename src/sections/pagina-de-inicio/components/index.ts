@@ -1,0 +1,7 @@
+export { PaginaDeInicio } from './PaginaDeInicio'
+export { HeroSection } from './HeroSection'
+export { PropiedadCard } from './PropiedadCard'
+export { PropiedadesCarousel } from './PropiedadesCarousel'
+export { ServicioCard } from './ServicioCard'
+export { ValorPropuestaCard } from './ValorPropuestaCard'
+export { ContactoCTASection } from './ContactoCTASection'

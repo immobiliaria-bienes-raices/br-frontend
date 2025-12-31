@@ -1,0 +1,261 @@
+{
+  "_meta": {
+    "models": {
+      "propiedadesDestacadas": "Featured properties displayed in the homepage carousel. Each property shows key information to attract potential buyers or renters.",
+      "servicios": "Services offered by the real estate agency to property owners, including brokerage, administration, and insurance.",
+      "valorPropuestas": "Value propositions highlighting the key benefits of working with Bienes Raíces.",
+      "hero": "Hero section content including headline, subheadline, and call-to-action text.",
+      "zonas": "Neighborhoods in Bogotá D.C. where properties are located."
+    },
+    "relationships": [
+      "Each Propiedad belongs to a Zona (neighborhood)",
+      "Servicios are standalone offerings presented on the homepage",
+      "ValorPropuestas support the brand message in the hero section"
+    ]
+  },
+  "hero": {
+    "headline": "Encuentra tu hogar ideal en Bogotá",
+    "subheadline": "Apartamentos, casas y locales comerciales con servicio integral de intermediación inmobiliaria",
+    "ctaText": "Explorar Propiedades",
+    "ctaSecondary": "Conoce Nuestros Servicios",
+    "backgroundImage": "/mocks/WhatsApp Image 2025-12-31 at 3.18.16 PM.jpeg"
+  },
+  "zonas": [
+    {
+      "id": "zona-001",
+      "nombre": "Puente Largo",
+      "localidad": "Suba"
+    },
+    {
+      "id": "zona-002",
+      "nombre": "Chapinero Alto",
+      "localidad": "Chapinero"
+    },
+    {
+      "id": "zona-003",
+      "nombre": "Rosales",
+      "localidad": "Chapinero"
+    },
+    {
+      "id": "zona-004",
+      "nombre": "Chicó",
+      "localidad": "Usaquén"
+    },
+    {
+      "id": "zona-005",
+      "nombre": "Cedritos",
+      "localidad": "Usaquén"
+    },
+    {
+      "id": "zona-006",
+      "nombre": "Santa Bárbara",
+      "localidad": "Usaquén"
+    }
+  ],
+  "propiedadesDestacadas": [
+    {
+      "id": "prop-001",
+      "titulo": "Apartaestudio en Puente Largo",
+      "tipo": "apartaestudio",
+      "modalidad": "arriendo",
+      "precio": 1900000,
+      "moneda": "COP",
+      "area": 35,
+      "habitaciones": 1,
+      "banos": 1,
+      "parqueadero": false,
+      "piso": 3,
+      "zona": {
+        "id": "zona-001",
+        "nombre": "Puente Largo",
+        "localidad": "Suba"
+      },
+      "descripcionCorta": "Apartaestudio exclusivo con pisos en madera natural, cocina abierta y excelente iluminación.",
+      "imagenPrincipal": "/mocks/WhatsApp Image 2025-12-31 at 3.18.16 PM.jpeg",
+      "imagenes": [
+        "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM.jpeg",
+        "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (1).jpeg",
+        "/mocks/WhatsApp Image 2025-12-31 at 3.18.19 PM.jpeg"
+      ],
+      "destacado": true,
+      "caracteristicas": ["Pisos en madera", "Cocina abierta", "Vigilancia 24/7", "Vista al parque"]
+    },
+    {
+      "id": "prop-002",
+      "titulo": "Apartamento en Chapinero Alto",
+      "tipo": "apartamento",
+      "modalidad": "venta",
+      "precio": 450000000,
+      "moneda": "COP",
+      "area": 85,
+      "habitaciones": 2,
+      "banos": 2,
+      "parqueadero": true,
+      "piso": 8,
+      "zona": {
+        "id": "zona-002",
+        "nombre": "Chapinero Alto",
+        "localidad": "Chapinero"
+      },
+      "descripcionCorta": "Hermoso apartamento con vista a los cerros, acabados de lujo y ubicación privilegiada.",
+      "imagenPrincipal": "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (2).jpeg",
+      "imagenes": [
+        "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (3).jpeg",
+        "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (4).jpeg"
+      ],
+      "destacado": true,
+      "caracteristicas": ["Vista a los cerros", "Parqueadero cubierto", "Depósito", "Gimnasio"]
+    },
+    {
+      "id": "prop-003",
+      "titulo": "Casa en Rosales",
+      "tipo": "casa",
+      "modalidad": "venta",
+      "precio": 1200000000,
+      "moneda": "COP",
+      "area": 220,
+      "habitaciones": 4,
+      "banos": 3,
+      "parqueadero": true,
+      "piso": null,
+      "zona": {
+        "id": "zona-003",
+        "nombre": "Rosales",
+        "localidad": "Chapinero"
+      },
+      "descripcionCorta": "Espectacular casa de tres pisos con jardín privado y terraza con vista panorámica.",
+      "imagenPrincipal": "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (5).jpeg",
+      "imagenes": [
+        "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (6).jpeg"
+      ],
+      "destacado": true,
+      "caracteristicas": ["Jardín privado", "Terraza", "3 pisos", "Estudio"]
+    },
+    {
+      "id": "prop-004",
+      "titulo": "Apartamento en Chicó",
+      "tipo": "apartamento",
+      "modalidad": "arriendo",
+      "precio": 4500000,
+      "moneda": "COP",
+      "area": 120,
+      "habitaciones": 3,
+      "banos": 2,
+      "parqueadero": true,
+      "piso": 12,
+      "zona": {
+        "id": "zona-004",
+        "nombre": "Chicó",
+        "localidad": "Usaquén"
+      },
+      "descripcionCorta": "Amplio apartamento en zona exclusiva con excelentes vías de acceso y cerca a centros comerciales.",
+      "imagenPrincipal": "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (7).jpeg",
+      "imagenes": [
+        "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (8).jpeg"
+      ],
+      "destacado": true,
+      "caracteristicas": ["Zona exclusiva", "2 parqueaderos", "Depósito", "Portería 24h"]
+    },
+    {
+      "id": "prop-005",
+      "titulo": "Local Comercial en Cedritos",
+      "tipo": "local",
+      "modalidad": "arriendo",
+      "precio": 3200000,
+      "moneda": "COP",
+      "area": 65,
+      "habitaciones": null,
+      "banos": 1,
+      "parqueadero": false,
+      "piso": 1,
+      "zona": {
+        "id": "zona-005",
+        "nombre": "Cedritos",
+        "localidad": "Usaquén"
+      },
+      "descripcionCorta": "Local comercial en esquina con alto flujo peatonal, ideal para negocio de retail.",
+      "imagenPrincipal": "/mocks/WhatsApp Image 2025-12-31 at 3.18.19 PM (1).jpeg",
+      "imagenes": [],
+      "destacado": true,
+      "caracteristicas": ["Esquinero", "Alto flujo", "Vitrina amplia", "Zona comercial"]
+    },
+    {
+      "id": "prop-006",
+      "titulo": "Penthouse en Santa Bárbara",
+      "tipo": "apartamento",
+      "modalidad": "venta",
+      "precio": 980000000,
+      "moneda": "COP",
+      "area": 180,
+      "habitaciones": 3,
+      "banos": 3,
+      "parqueadero": true,
+      "piso": 15,
+      "zona": {
+        "id": "zona-006",
+        "nombre": "Santa Bárbara",
+        "localidad": "Usaquén"
+      },
+      "descripcionCorta": "Exclusivo penthouse con terraza privada de 50m², jacuzzi y vista de 360 grados.",
+      "imagenPrincipal": "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM.jpeg",
+      "imagenes": [
+        "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (1).jpeg"
+      ],
+      "destacado": true,
+      "caracteristicas": ["Terraza 50m²", "Jacuzzi", "Vista 360°", "3 parqueaderos"]
+    }
+  ],
+  "servicios": [
+    {
+      "id": "serv-001",
+      "titulo": "Búsqueda de Clientes",
+      "descripcion": "Encontramos compradores e inquilinos calificados para sus propiedades mediante estrategias de marketing digital y nuestra amplia red de contactos.",
+      "icono": "users"
+    },
+    {
+      "id": "serv-002",
+      "titulo": "Gestión Administrativa",
+      "descripcion": "Nos encargamos de toda la documentación y trámites relacionados con su propiedad, desde contratos hasta pagos.",
+      "icono": "file-text"
+    },
+    {
+      "id": "serv-003",
+      "titulo": "Manejo de Seguros",
+      "descripcion": "A través de nuestras alianzas estratégicas con aseguradoras, gestionamos los seguros necesarios para proteger su inversión.",
+      "icono": "shield"
+    },
+    {
+      "id": "serv-004",
+      "titulo": "Exhibición de Propiedades",
+      "descripcion": "Mostramos sus propiedades a clientes potenciales, coordinando visitas y presentaciones profesionales.",
+      "icono": "home"
+    }
+  ],
+  "valorPropuestas": [
+    {
+      "id": "vp-001",
+      "titulo": "Delegación Total",
+      "descripcion": "Confíe completamente en nosotros para comercializar su propiedad. Nos encargamos de todo el proceso.",
+      "icono": "check-circle"
+    },
+    {
+      "id": "vp-002",
+      "titulo": "Alianzas Estratégicas",
+      "descripcion": "Trabajamos con las mejores aseguradoras para ofrecer protección completa a su inversión.",
+      "icono": "handshake"
+    },
+    {
+      "id": "vp-003",
+      "titulo": "Experiencia Local",
+      "descripcion": "Conocemos el mercado inmobiliario de Bogotá D.C. y le ayudamos a encontrar las mejores oportunidades.",
+      "icono": "map-pin"
+    }
+  ],
+  "contactoCTA": {
+    "titulo": "¿Listo para encontrar su próxima propiedad?",
+    "subtitulo": "Contáctenos hoy y déjenos ayudarle a encontrar el hogar perfecto en Bogotá.",
+    "ctaText": "Contáctenos",
+    "telefono": "+57 (1) 234 5678",
+    "email": "info@bienesraices.co"
+  }
+}
