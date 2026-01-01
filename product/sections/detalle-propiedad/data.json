@@ -1,0 +1,162 @@
+{
+  "_meta": {
+    "models": {
+      "propiedad": "Full property details including all images, description, and characteristics.",
+      "agente": "Contact agent assigned to this property.",
+      "propiedadesSimilares": "Related properties shown in carousel at bottom of page."
+    },
+    "relationships": [
+      "Propiedad is the main entity displayed on this page",
+      "Agente is the realtor contact for this property",
+      "PropiedadesSimilares are other properties in similar price range or location"
+    ]
+  },
+  "breadcrumbs": [
+    { "label": "Inicio", "href": "/" },
+    { "label": "Propiedades", "href": "/propiedades" },
+    { "label": "Apartamento en Puente Largo", "href": "#" }
+  ],
+  "propiedad": {
+    "id": "prop-001",
+    "titulo": "Apartamento en Puente Largo",
+    "tipo": "apartamento",
+    "modalidad": "arriendo",
+    "precio": 1900000,
+    "moneda": "COP",
+    "area": 35,
+    "habitaciones": 1,
+    "banos": 1,
+    "parqueadero": false,
+    "piso": 3,
+    "zona": {
+      "id": "zona-001",
+      "nombre": "Puente Largo",
+      "localidad": "Suba"
+    },
+    "direccion": "Calle 127 #60-15, Bogotá",
+    "coordenadas": {
+      "lat": 4.7110,
+      "lng": -74.0721
+    },
+    "descripcionCorta": "Apartamento exclusivo con pisos en madera natural, cocina abierta y excelente iluminación.",
+    "descripcionCompleta": "Hermoso apartamento ubicado en el corazón de Puente Largo. Cuenta con acabados de primera calidad, pisos en madera natural, cocina integral con electrodomésticos modernos, y amplio balcón con vista al parque.\n\nEl apartamento ofrece una distribución inteligente que maximiza cada metro cuadrado, con espacios iluminados naturalmente gracias a sus amplios ventanales. La cocina abierta tipo americano se integra perfectamente con la sala-comedor, creando un ambiente moderno y acogedor.\n\nEl edificio cuenta con vigilancia 24/7, zona de lavandería comunal, salón social para eventos, y está ubicado a pocos pasos del centro comercial, supermercados, restaurantes y transporte público.\n\nIdeal para profesionales o parejas jóvenes que buscan calidad de vida en una de las mejores zonas de Bogotá.",
+    "imagenPrincipal": "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.16 PM.jpeg",
+    "imagenes": [
+      "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM.jpeg",
+      "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (1).jpeg",
+      "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (2).jpeg",
+      "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (3).jpeg",
+      "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (4).jpeg",
+      "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (5).jpeg",
+      "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (6).jpeg",
+      "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (7).jpeg",
+      "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (8).jpeg",
+      "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.19 PM.jpeg",
+      "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.19 PM (1).jpeg"
+    ],
+    "destacado": true,
+    "caracteristicas": [
+      "Pisos en madera",
+      "Cocina abierta",
+      "Vigilancia 24/7",
+      "Vista al parque",
+      "Balcón",
+      "Cocina integral",
+      "Closets empotrados",
+      "Iluminación natural",
+      "Zona de lavandería",
+      "Salón comunal"
+    ]
+  },
+  "agente": {
+    "id": "team-001",
+    "nombre": "Diana Barrera",
+    "cargo": "Directora Comercial",
+    "telefono": "+57 300 123 4567",
+    "email": "diana.barrera@bienesraices.co",
+    "foto": "/assets/realtor2.png"
+  },
+  "contactoOpciones": [
+    {
+      "id": "contact-001",
+      "tipo": "ai-chat",
+      "titulo": "Chat con IA",
+      "descripcion": "Obtén respuestas instantáneas sobre esta propiedad",
+      "icono": "bot",
+      "accion": "openAIChat"
+    },
+    {
+      "id": "contact-002",
+      "tipo": "email",
+      "titulo": "Enviar Email",
+      "descripcion": "Escríbenos y te respondemos en 24 horas",
+      "icono": "mail",
+      "accion": "mailto:",
+      "valor": "diana.barrera@bienesraices.co"
+    },
+    {
+      "id": "contact-003",
+      "tipo": "whatsapp",
+      "titulo": "WhatsApp",
+      "descripcion": "Chatea con Diana ahora",
+      "icono": "message-circle",
+      "accion": "https://wa.me/",
+      "valor": "573001234567"
+    }
+  ],
+  "propiedadesSimilares": [
+    {
+      "id": "prop-002",
+      "titulo": "Apartamento en Chapinero Alto",
+      "tipo": "apartamento",
+      "modalidad": "venta",
+      "precio": 450000000,
+      "area": 85,
+      "habitaciones": 2,
+      "banos": 2,
+      "imagenPrincipal": "/mocks/prop2/WhatsApp Image 2025-12-31 at 4.08.55 PM.jpeg",
+      "zona": {
+        "nombre": "Chapinero Alto",
+        "localidad": "Chapinero"
+      }
+    },
+    {
+      "id": "prop-003",
+      "titulo": "Apartaestudio en Chicó",
+      "tipo": "apartaestudio",
+      "modalidad": "arriendo",
+      "precio": 2200000,
+      "area": 42,
+      "habitaciones": null,
+      "banos": 1,
+      "imagenPrincipal": "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (2).jpeg",
+      "zona": {
+        "nombre": "Chicó",
+        "localidad": "Chapinero"
+      }
+    },
+    {
+      "id": "prop-004",
+      "titulo": "Apartamento en Cedritos",
+      "tipo": "apartamento",
+      "modalidad": "arriendo",
+      "precio": 1750000,
+      "area": 48,
+      "habitaciones": 2,
+      "banos": 1,
+      "imagenPrincipal": "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (5).jpeg",
+      "zona": {
+        "nombre": "Cedritos",
+        "localidad": "Usaquén"
+      }
+    }
+  ],
+  "mapa": {
+    "centro": {
+      "lat": 4.7110,
+      "lng": -74.0721
+    },
+    "zoom": 15,
+    "apiKeyPlaceholder": "YOUR_GOOGLE_MAPS_API_KEY"
+  }
+}

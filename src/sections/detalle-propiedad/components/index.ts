@@ -1,0 +1,6 @@
+export { DetallePropiedad } from './DetallePropiedad'
+export { ImageGallery } from './ImageGallery'
+export { PropertySpecs } from './PropertySpecs'
+export { ContactCard } from './ContactCard'
+export { LocationSection } from './LocationSection'
+export { SimilarProperties } from './SimilarProperties'

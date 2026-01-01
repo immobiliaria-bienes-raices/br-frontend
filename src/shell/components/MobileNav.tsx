@@ -6,11 +6,11 @@ import type { NavigationItem } from './AppShell'
 
 interface MobileNavProps {
   items: NavigationItem[]
-  logoText?: string
+  logoSrc?: string
   onNavigate?: (href: string) => void
 }
 
-export function MobileNav({ items, logoText = 'Bienes Raíces', onNavigate }: MobileNavProps) {
+export function MobileNav({ items, logoSrc = '/assets/logo.svg', onNavigate }: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleNavigate = (href: string) => {
@@ -47,17 +47,14 @@ export function MobileNav({ items, logoText = 'Bienes Raíces', onNavigate }: Mo
       >
         {/* Drawer Header */}
         <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-700">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[#77333B] rounded-sm flex items-center justify-center">
-              <span className="text-white font-bold text-sm">BR</span>
-            </div>
-            <span className="font-semibold text-slate-900 dark:text-white">
-              {logoText}
-            </span>
-          </div>
+          <img
+            src={logoSrc}
+            alt=""
+            className="h-8 w-auto"
+          />
           <button
             onClick={() => setIsOpen(false)}
-            className="p-2 text-slate-600 dark:text-slate-300 hover:text-[#77333B] transition-colors"
+            className="p-2 text-slate-600 dark:text-slate-300 hover:text-[#722F37] transition-colors"
             aria-label="Cerrar menú"
           >
             <X size={20} />
@@ -75,7 +72,7 @@ export function MobileNav({ items, logoText = 'Bienes Raíces', onNavigate }: Mo
                     w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors
                     ${
                       item.isActive
-                        ? 'bg-[#77333B]/10 text-[#77333B]'
+                        ? 'bg-[#722F37]/10 text-[#722F37]'
                         : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                     }
                   `}
@@ -89,7 +86,7 @@ export function MobileNav({ items, logoText = 'Bienes Raíces', onNavigate }: Mo
           {/* CTA Button */}
           <button
             onClick={() => handleNavigate('/contacto')}
-            className="w-full mt-6 px-5 py-3 bg-[#77333B] hover:bg-[#5a272e] text-white text-sm font-medium rounded-lg transition-colors"
+            className="w-full mt-6 px-5 py-3 bg-[#722F37] hover:bg-[#5a272e] text-white text-sm font-medium rounded-lg transition-colors"
           >
             Contáctenos
           </button>

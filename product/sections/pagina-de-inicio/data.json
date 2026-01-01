@@ -1,16 +1,17 @@
 {
   "_meta": {
     "models": {
-      "propiedadesDestacadas": "Featured properties displayed in the homepage carousel. Each property shows key information to attract potential buyers or renters.",
-      "servicios": "Services offered by the real estate agency to property owners, including brokerage, administration, and insurance.",
+      "propiedadesDestacadas": "Featured properties displayed on the homepage. Each property shows key information to attract potential buyers or renters.",
+      "equipo": "Team members (realtors) displayed in the 'Conoce el Equipo' section with their profile information.",
+      "servicios": "Services offered by the real estate agency to property owners.",
       "valorPropuestas": "Value propositions highlighting the key benefits of working with Bienes Raíces.",
       "hero": "Hero section content including headline, subheadline, and call-to-action text.",
-      "zonas": "Neighborhoods in Bogotá D.C. where properties are located."
+      "contactoOpciones": "Contact options available through the 'Preguntar Sobre' button."
     },
     "relationships": [
       "Each Propiedad belongs to a Zona (neighborhood)",
-      "Servicios are standalone offerings presented on the homepage",
-      "ValorPropuestas support the brand message in the hero section"
+      "Equipo members are standalone profiles displayed in the header",
+      "ContactoOpciones are displayed in the 'Preguntar Sobre' dropdown"
     ]
   },
   "hero": {
@@ -18,45 +19,34 @@
     "subheadline": "Apartamentos, casas y locales comerciales con servicio integral de intermediación inmobiliaria",
     "ctaText": "Explorar Propiedades",
     "ctaSecondary": "Conoce Nuestros Servicios",
-    "backgroundImage": "/mocks/WhatsApp Image 2025-12-31 at 3.18.16 PM.jpeg"
+    "backgroundImage": "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.16 PM.jpeg",
+    "logo": "/assets/logo.svg"
   },
-  "zonas": [
+  "equipo": [
     {
-      "id": "zona-001",
-      "nombre": "Puente Largo",
-      "localidad": "Suba"
+      "id": "team-001",
+      "nombre": "Diana Barrera",
+      "cargo": "Directora Comercial",
+      "telefono": "+57 300 123 4567",
+      "email": "diana.barrera@bienesraices.co",
+      "foto": "/assets/realtor2.png",
+      "descripcion": "Más de 15 años de experiencia en el mercado inmobiliario de Bogotá."
     },
     {
-      "id": "zona-002",
-      "nombre": "Chapinero Alto",
-      "localidad": "Chapinero"
-    },
-    {
-      "id": "zona-003",
-      "nombre": "Rosales",
-      "localidad": "Chapinero"
-    },
-    {
-      "id": "zona-004",
-      "nombre": "Chicó",
-      "localidad": "Usaquén"
-    },
-    {
-      "id": "zona-005",
-      "nombre": "Cedritos",
-      "localidad": "Usaquén"
-    },
-    {
-      "id": "zona-006",
-      "nombre": "Santa Bárbara",
-      "localidad": "Usaquén"
+      "id": "team-002",
+      "nombre": "Juan Serrano",
+      "cargo": "Asesor Inmobiliario Senior",
+      "telefono": "+57 300 234 5678",
+      "email": "juan.serrano@bienesraices.co",
+      "foto": "/assets/realtor1.png",
+      "descripcion": "Especialista en propiedades residenciales de alto valor."
     }
   ],
   "propiedadesDestacadas": [
     {
       "id": "prop-001",
-      "titulo": "Apartaestudio en Puente Largo",
-      "tipo": "apartaestudio",
+      "titulo": "Apartamento en Puente Largo",
+      "tipo": "apartamento",
       "modalidad": "arriendo",
       "precio": 1900000,
       "moneda": "COP",
@@ -70,15 +60,29 @@
         "nombre": "Puente Largo",
         "localidad": "Suba"
       },
-      "descripcionCorta": "Apartaestudio exclusivo con pisos en madera natural, cocina abierta y excelente iluminación.",
-      "imagenPrincipal": "/mocks/WhatsApp Image 2025-12-31 at 3.18.16 PM.jpeg",
+      "direccion": "Calle 127 #60-15, Bogotá",
+      "coordenadas": {
+        "lat": 4.7110,
+        "lng": -74.0721
+      },
+      "descripcionCorta": "Apartamento exclusivo con pisos en madera natural, cocina abierta y excelente iluminación.",
+      "descripcionCompleta": "Hermoso apartamento ubicado en el corazón de Puente Largo. Cuenta con acabados de primera calidad, pisos en madera natural, cocina integral con electrodomésticos modernos, y amplio balcón con vista al parque. Edificio con vigilancia 24/7, zona de lavandería y salón comunal.",
+      "imagenPrincipal": "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.16 PM.jpeg",
       "imagenes": [
-        "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM.jpeg",
-        "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (1).jpeg",
-        "/mocks/WhatsApp Image 2025-12-31 at 3.18.19 PM.jpeg"
+        "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM.jpeg",
+        "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (1).jpeg",
+        "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (2).jpeg",
+        "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (3).jpeg",
+        "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (4).jpeg",
+        "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (5).jpeg",
+        "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (6).jpeg",
+        "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (7).jpeg",
+        "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (8).jpeg",
+        "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.19 PM.jpeg",
+        "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.19 PM (1).jpeg"
       ],
       "destacado": true,
-      "caracteristicas": ["Pisos en madera", "Cocina abierta", "Vigilancia 24/7", "Vista al parque"]
+      "caracteristicas": ["Pisos en madera", "Cocina abierta", "Vigilancia 24/7", "Vista al parque", "Balcón"]
     },
     {
       "id": "prop-002",
@@ -97,112 +101,54 @@
         "nombre": "Chapinero Alto",
         "localidad": "Chapinero"
       },
+      "direccion": "Carrera 5 #59-30, Bogotá",
+      "coordenadas": {
+        "lat": 4.6486,
+        "lng": -74.0628
+      },
       "descripcionCorta": "Hermoso apartamento con vista a los cerros, acabados de lujo y ubicación privilegiada.",
-      "imagenPrincipal": "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (2).jpeg",
+      "descripcionCompleta": "Espectacular apartamento en uno de los sectores más exclusivos de Bogotá. Vista panorámica a los cerros orientales, acabados de lujo en mármol y madera, cocina tipo americano con isla, dos habitaciones con baño privado, estudio, parqueadero cubierto y depósito. Edificio con gimnasio, salón social y terraza BBQ.",
+      "imagenPrincipal": "/mocks/prop2/WhatsApp Image 2025-12-31 at 4.08.55 PM.jpeg",
       "imagenes": [
-        "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (3).jpeg",
-        "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (4).jpeg"
+        "/mocks/prop2/WhatsApp Image 2025-12-31 at 4.09.24 PM.jpeg",
+        "/mocks/prop2/WhatsApp Image 2025-12-31 at 4.09.24 PM (1).jpeg",
+        "/mocks/prop2/WhatsApp Image 2025-12-31 at 4.09.24 PM (2).jpeg",
+        "/mocks/prop2/WhatsApp Image 2025-12-31 at 4.09.24 PM (3).jpeg",
+        "/mocks/prop2/WhatsApp Image 2025-12-31 at 4.09.24 PM (4).jpeg",
+        "/mocks/prop2/WhatsApp Image 2025-12-31 at 4.09.24 PM (5).jpeg",
+        "/mocks/prop2/WhatsApp Image 2025-12-31 at 4.09.24 PM (6).jpeg",
+        "/mocks/prop2/WhatsApp Image 2025-12-31 at 4.09.24 PM (7).jpeg"
       ],
       "destacado": true,
-      "caracteristicas": ["Vista a los cerros", "Parqueadero cubierto", "Depósito", "Gimnasio"]
+      "caracteristicas": ["Vista a los cerros", "Parqueadero cubierto", "Depósito", "Gimnasio", "Terraza BBQ"]
+    }
+  ],
+  "contactoOpciones": [
+    {
+      "id": "contact-001",
+      "tipo": "ai-chat",
+      "titulo": "Chat con IA",
+      "descripcion": "Obtén respuestas instantáneas sobre esta propiedad",
+      "icono": "bot",
+      "accion": "openAIChat"
     },
     {
-      "id": "prop-003",
-      "titulo": "Casa en Rosales",
-      "tipo": "casa",
-      "modalidad": "venta",
-      "precio": 1200000000,
-      "moneda": "COP",
-      "area": 220,
-      "habitaciones": 4,
-      "banos": 3,
-      "parqueadero": true,
-      "piso": null,
-      "zona": {
-        "id": "zona-003",
-        "nombre": "Rosales",
-        "localidad": "Chapinero"
-      },
-      "descripcionCorta": "Espectacular casa de tres pisos con jardín privado y terraza con vista panorámica.",
-      "imagenPrincipal": "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (5).jpeg",
-      "imagenes": [
-        "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (6).jpeg"
-      ],
-      "destacado": true,
-      "caracteristicas": ["Jardín privado", "Terraza", "3 pisos", "Estudio"]
+      "id": "contact-002",
+      "tipo": "email",
+      "titulo": "Enviar Email",
+      "descripcion": "Escríbenos y te respondemos en 24 horas",
+      "icono": "mail",
+      "accion": "mailto:",
+      "valor": ""
     },
     {
-      "id": "prop-004",
-      "titulo": "Apartamento en Chicó",
-      "tipo": "apartamento",
-      "modalidad": "arriendo",
-      "precio": 4500000,
-      "moneda": "COP",
-      "area": 120,
-      "habitaciones": 3,
-      "banos": 2,
-      "parqueadero": true,
-      "piso": 12,
-      "zona": {
-        "id": "zona-004",
-        "nombre": "Chicó",
-        "localidad": "Usaquén"
-      },
-      "descripcionCorta": "Amplio apartamento en zona exclusiva con excelentes vías de acceso y cerca a centros comerciales.",
-      "imagenPrincipal": "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (7).jpeg",
-      "imagenes": [
-        "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (8).jpeg"
-      ],
-      "destacado": true,
-      "caracteristicas": ["Zona exclusiva", "2 parqueaderos", "Depósito", "Portería 24h"]
-    },
-    {
-      "id": "prop-005",
-      "titulo": "Local Comercial en Cedritos",
-      "tipo": "local",
-      "modalidad": "arriendo",
-      "precio": 3200000,
-      "moneda": "COP",
-      "area": 65,
-      "habitaciones": null,
-      "banos": 1,
-      "parqueadero": false,
-      "piso": 1,
-      "zona": {
-        "id": "zona-005",
-        "nombre": "Cedritos",
-        "localidad": "Usaquén"
-      },
-      "descripcionCorta": "Local comercial en esquina con alto flujo peatonal, ideal para negocio de retail.",
-      "imagenPrincipal": "/mocks/WhatsApp Image 2025-12-31 at 3.18.19 PM (1).jpeg",
-      "imagenes": [],
-      "destacado": true,
-      "caracteristicas": ["Esquinero", "Alto flujo", "Vitrina amplia", "Zona comercial"]
-    },
-    {
-      "id": "prop-006",
-      "titulo": "Penthouse en Santa Bárbara",
-      "tipo": "apartamento",
-      "modalidad": "venta",
-      "precio": 980000000,
-      "moneda": "COP",
-      "area": 180,
-      "habitaciones": 3,
-      "banos": 3,
-      "parqueadero": true,
-      "piso": 15,
-      "zona": {
-        "id": "zona-006",
-        "nombre": "Santa Bárbara",
-        "localidad": "Usaquén"
-      },
-      "descripcionCorta": "Exclusivo penthouse con terraza privada de 50m², jacuzzi y vista de 360 grados.",
-      "imagenPrincipal": "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM.jpeg",
-      "imagenes": [
-        "/mocks/WhatsApp Image 2025-12-31 at 3.18.17 PM (1).jpeg"
-      ],
-      "destacado": true,
-      "caracteristicas": ["Terraza 50m²", "Jacuzzi", "Vista 360°", "3 parqueaderos"]
+      "id": "contact-003",
+      "tipo": "whatsapp",
+      "titulo": "WhatsApp",
+      "descripcion": "Chatea con un asesor ahora",
+      "icono": "message-circle",
+      "accion": "https://wa.me/",
+      "valor": ""
     }
   ],
   "servicios": [
@@ -255,7 +201,16 @@
     "titulo": "¿Listo para encontrar su próxima propiedad?",
     "subtitulo": "Contáctenos hoy y déjenos ayudarle a encontrar el hogar perfecto en Bogotá.",
     "ctaText": "Contáctenos",
+    "preguntarSobreText": "Preguntar Sobre",
     "telefono": "+57 (1) 234 5678",
     "email": "info@bienesraices.co"
+  },
+  "mapa": {
+    "centro": {
+      "lat": 4.6800,
+      "lng": -74.0675
+    },
+    "zoom": 12,
+    "apiKeyPlaceholder": "YOUR_GOOGLE_MAPS_API_KEY"
   }
 }

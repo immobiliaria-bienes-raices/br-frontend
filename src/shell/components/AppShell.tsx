@@ -10,14 +10,14 @@ export interface NavigationItem {
 export interface AppShellProps {
   children: React.ReactNode
   navigationItems: NavigationItem[]
-  logoText?: string
+  logoSrc?: string
   onNavigate?: (href: string) => void
 }
 
 export function AppShell({
   children,
   navigationItems,
-  logoText = 'Bienes Raíces',
+  logoSrc = '/assets/logo.svg',
   onNavigate,
 }: AppShellProps) {
   return (
@@ -30,19 +30,13 @@ export function AppShell({
             <div className="flex-shrink-0">
               <button
                 onClick={() => onNavigate?.('/')}
-                className="flex items-center gap-3 group"
+                className="block transition-transform duration-300 hover:scale-105"
               >
-                <div className="w-10 h-10 bg-[#77333B] rounded-sm flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">BR</span>
-                </div>
-                <div className="hidden sm:block">
-                  <span className="text-xl font-semibold text-slate-900 dark:text-white tracking-tight">
-                    {logoText}
-                  </span>
-                  <span className="block text-xs text-[#77333B] dark:text-[#77333B] uppercase tracking-widest">
-                    Inmobiliaria
-                  </span>
-                </div>
+                <img
+                  src={logoSrc}
+                  alt=""
+                  className="h-14 md:h-16 w-auto"
+                />
               </button>
             </div>
 
@@ -55,7 +49,7 @@ export function AppShell({
             {/* Mobile Navigation */}
             <MobileNav
               items={navigationItems}
-              logoText={logoText}
+              logoSrc={logoSrc}
               onNavigate={onNavigate}
             />
           </div>
@@ -73,18 +67,12 @@ export function AppShell({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Brand */}
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-[#77333B] rounded-sm flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">BR</span>
-                </div>
-                <div>
-                  <span className="text-xl font-semibold tracking-tight">
-                    {logoText}
-                  </span>
-                  <span className="block text-xs text-[#77333B] uppercase tracking-widest">
-                    Inmobiliaria
-                  </span>
-                </div>
+              <div className="mb-4">
+                <img
+                  src={logoSrc}
+                  alt=""
+                  className="h-10 w-auto brightness-0 invert"
+                />
               </div>
               <p className="text-slate-400 text-sm">
                 Plataforma inmobiliaria integral en Bogotá D.C.
@@ -124,7 +112,7 @@ export function AppShell({
           </div>
 
           <div className="mt-12 pt-8 border-t border-slate-800 text-center text-sm text-slate-500">
-            © {new Date().getFullYear()} Bienes Raíces: Inmobiliaria. Todos los derechos reservados.
+            © {new Date().getFullYear()} Todos los derechos reservados.
           </div>
         </div>
       </footer>

@@ -8,57 +8,88 @@ interface HeroSectionProps {
 
 export function HeroSection({ hero, onExplorarPropiedades, onVerServicios }: HeroSectionProps) {
   return (
-    <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+      {/* Background Image with Elegant Overlay */}
+      <div className="absolute inset-0 z-0">
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center scale-105 animate-subtle-zoom"
           style={{ backgroundImage: `url(${hero.backgroundImage})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-900/60 to-slate-900/40" />
+        {/* Sophisticated gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/50 to-slate-900/80" />
+        {/* Subtle vignette effect */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.3)_100%)]" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="max-w-3xl mx-auto">
-          {/* Decorative Line */}
-          <div className="w-16 h-0.5 bg-[#77333B] mx-auto mb-8" />
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {/* Decorative Element */}
+        <div className="flex items-center justify-center gap-4 mb-8">
+          <div className="w-12 h-px bg-[#722F37]" />
+          <div className="w-2 h-2 bg-[#722F37] rotate-45" />
+          <div className="w-12 h-px bg-[#722F37]" />
+        </div>
 
-          {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light text-white tracking-tight leading-tight mb-6">
-            {hero.headline}
-          </h1>
+        {/* Headline */}
+        <h1 className="text-4xl sm:text-5xl lg:text-7xl font-light text-white tracking-tight leading-[1.1] mb-6">
+          {hero.headline}
+        </h1>
 
-          {/* Subheadline */}
-          <p className="text-lg sm:text-xl text-slate-300 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
-            {hero.subheadline}
-          </p>
+        {/* Subheadline */}
+        <p className="text-lg sm:text-xl text-white/80 font-light max-w-2xl mx-auto mb-12 leading-relaxed">
+          {hero.subheadline}
+        </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              onClick={onExplorarPropiedades}
-              className="group relative px-8 py-4 bg-[#77333B] text-white font-medium tracking-wide uppercase text-sm overflow-hidden transition-all duration-300 hover:bg-[#5a272e]"
-            >
-              <span className="relative z-10">{hero.ctaText}</span>
-              <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            </button>
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onClick={onExplorarPropiedades}
+            className="group relative px-10 py-4 bg-[#722F37] text-white font-medium tracking-wider uppercase text-sm overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#722F37]/30"
+          >
+            <span className="relative z-10 flex items-center gap-3">
+              {hero.ctaText}
+              <svg
+                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#8a3a42] to-[#722F37] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+          </button>
 
-            <button
-              onClick={onVerServicios}
-              className="px-8 py-4 border border-white/30 text-white font-medium tracking-wide uppercase text-sm hover:bg-white/10 transition-all duration-300"
-            >
-              {hero.ctaSecondary}
-            </button>
-          </div>
+          <button
+            onClick={onVerServicios}
+            className="px-10 py-4 border border-white/40 text-white font-medium tracking-wider uppercase text-sm hover:bg-white/10 hover:border-white/60 transition-all duration-300 backdrop-blur-sm"
+          >
+            {hero.ctaSecondary}
+          </button>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/60">
-        <span className="text-xs uppercase tracking-widest">Desplazar</span>
-        <div className="w-px h-12 bg-gradient-to-b from-white/60 to-transparent animate-pulse" />
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-white/50">
+        <span className="text-[10px] uppercase tracking-[0.3em]">Desplazar</span>
+        <div className="w-px h-12 bg-gradient-to-b from-white/50 to-transparent animate-pulse" />
       </div>
+
+      {/* Decorative Corner Elements */}
+      <div className="absolute top-20 left-8 w-20 h-20 border-l border-t border-white/20" />
+      <div className="absolute top-20 right-8 w-20 h-20 border-r border-t border-white/20" />
+      <div className="absolute bottom-20 left-8 w-20 h-20 border-l border-b border-white/20" />
+      <div className="absolute bottom-20 right-8 w-20 h-20 border-r border-b border-white/20" />
+
+      <style>{`
+        @keyframes subtle-zoom {
+          0%, 100% { transform: scale(1.05); }
+          50% { transform: scale(1.1); }
+        }
+        .animate-subtle-zoom {
+          animation: subtle-zoom 20s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   )
 }
