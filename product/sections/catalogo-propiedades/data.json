@@ -1,0 +1,514 @@
+{
+  "_meta": {
+    "models": {
+      "propiedades": "Property listings displayed in the catalog grid. Each property includes location, price, features, and badges (Nuevo, Destacado).",
+      "zonas": "Neighborhoods in Bogotá D.C. where properties are located, including estrato and postal code.",
+      "filtros": "Available filter options including property types, modalities, price ranges, and characteristics.",
+      "busquedasGuardadas": "Saved search configurations for logged-in users.",
+      "usuario": "Current user state including authentication status and favorite properties."
+    },
+    "relationships": [
+      "Each Propiedad belongs to a Zona (neighborhood)",
+      "Each BusquedaGuardada contains a set of filter values",
+      "Usuario has a list of favorite Propiedad IDs"
+    ]
+  },
+  "zonas": [
+    {
+      "id": "zona-001",
+      "nombre": "Santa Bárbara",
+      "localidad": "Usaquén",
+      "codigoPostal": "110121",
+      "estrato": "5-6",
+      "descripcion": "Reconocido por su alta concentración de estratos 5 y 6, con zonas residenciales exclusivas y centros empresariales."
+    },
+    {
+      "id": "zona-002",
+      "nombre": "La Carolina",
+      "localidad": "Usaquén",
+      "codigoPostal": "110121",
+      "estrato": "4-5",
+      "descripcion": "Zonas de estrato 4 y 5, con buena oferta de vivienda y proximidad a servicios."
+    },
+    {
+      "id": "zona-003",
+      "nombre": "El Retiro",
+      "localidad": "Chapinero",
+      "codigoPostal": "110221",
+      "estrato": "5-6",
+      "descripcion": "Un sector con gran presencia de estratos altos, cercano a importantes avenidas."
+    },
+    {
+      "id": "zona-004",
+      "nombre": "San Patricio",
+      "localidad": "Usaquén",
+      "codigoPostal": "110121",
+      "estrato": "4-6",
+      "descripcion": "Mezcla de estratos 4, 5 y 6, con desarrollo comercial y residencial."
+    },
+    {
+      "id": "zona-005",
+      "nombre": "Usaquén Centro",
+      "localidad": "Usaquén",
+      "codigoPostal": "110121",
+      "estrato": "4-6",
+      "descripcion": "Combina estratos altos (5, 6) con algunos de estrato 4, especialmente cerca de la plaza principal y zonas renovadas."
+    },
+    {
+      "id": "zona-006",
+      "nombre": "Country Club",
+      "localidad": "Usaquén",
+      "codigoPostal": "110121",
+      "estrato": "5-6",
+      "descripcion": "Sector de estratos 5 y 6, asociado a la exclusividad."
+    },
+    {
+      "id": "zona-007",
+      "nombre": "Los Cedros",
+      "localidad": "Usaquén",
+      "codigoPostal": "110121",
+      "estrato": "4-5",
+      "descripcion": "Zona residencial tranquila con buena conectividad y servicios."
+    }
+  ],
+  "filtros": {
+    "tipos": [
+      { "id": "apartamento", "label": "Apartamento" },
+      { "id": "casa", "label": "Casa" },
+      { "id": "apartaestudio", "label": "Apartaestudio" },
+      { "id": "local", "label": "Local Comercial" }
+    ],
+    "modalidades": [
+      { "id": "venta", "label": "Venta" },
+      { "id": "arriendo", "label": "Arriendo" }
+    ],
+    "habitaciones": [
+      { "id": "1", "label": "1+" },
+      { "id": "2", "label": "2+" },
+      { "id": "3", "label": "3+" },
+      { "id": "4", "label": "4+" }
+    ],
+    "banos": [
+      { "id": "1", "label": "1+" },
+      { "id": "2", "label": "2+" },
+      { "id": "3", "label": "3+" }
+    ],
+    "parqueadero": [
+      { "id": "con", "label": "Con parqueadero" },
+      { "id": "sin", "label": "Sin parqueadero" }
+    ],
+    "caracteristicas": [
+      { "id": "vista", "label": "Vista panorámica" },
+      { "id": "terraza", "label": "Terraza" },
+      { "id": "gimnasio", "label": "Gimnasio" },
+      { "id": "seguridad", "label": "Seguridad 24h" },
+      { "id": "piscina", "label": "Piscina" },
+      { "id": "jardin", "label": "Jardín" },
+      { "id": "estudio", "label": "Estudio" },
+      { "id": "deposito", "label": "Depósito" },
+      { "id": "chimenea", "label": "Chimenea" },
+      { "id": "balcon", "label": "Balcón" }
+    ],
+    "precioRango": {
+      "venta": { "min": 200000000, "max": 3000000000, "step": 50000000 },
+      "arriendo": { "min": 1000000, "max": 20000000, "step": 500000 }
+    },
+    "areaRango": { "min": 30, "max": 500, "step": 10 },
+    "codigosPostales": ["110121", "110221", "110131", "110231"]
+  },
+  "ordenOpciones": [
+    { "id": "recientes", "label": "Más recientes" },
+    { "id": "destacados", "label": "Mejores ofertas" },
+    { "id": "precio-asc", "label": "Precio: menor a mayor" },
+    { "id": "precio-desc", "label": "Precio: mayor a menor" },
+    { "id": "area-desc", "label": "Área: mayor a menor" }
+  ],
+  "propiedades": [
+    {
+      "id": "prop-001",
+      "titulo": "Apartamento de lujo en Santa Bárbara",
+      "tipo": "apartamento",
+      "modalidad": "venta",
+      "precio": 850000000,
+      "moneda": "COP",
+      "area": 145,
+      "habitaciones": 3,
+      "banos": 3,
+      "parqueadero": true,
+      "piso": 12,
+      "zona": {
+        "id": "zona-001",
+        "nombre": "Santa Bárbara",
+        "localidad": "Usaquén",
+        "codigoPostal": "110121",
+        "estrato": "5-6"
+      },
+      "direccion": "Calle 127 # 15-42",
+      "codigoPostal": "110121",
+      "coordenadas": { "lat": 4.7052, "lng": -74.0449 },
+      "descripcionCorta": "Espectacular apartamento con acabados de lujo, vista a los cerros y excelente ubicación.",
+      "descripcionCompleta": "Amplio apartamento de 145m² con 3 habitaciones cada una con baño privado. Cocina integral, zona de lavandería, depósito y 2 parqueaderos. Edificio con gimnasio, salón social y seguridad 24 horas.",
+      "imagenPrincipal": "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.16 PM.jpeg",
+      "imagenes": [
+        "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM.jpeg",
+        "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (1).jpeg"
+      ],
+      "esNuevo": true,
+      "esDestacado": true,
+      "fechaPublicacion": "2025-12-28",
+      "caracteristicas": ["Vista panorámica", "Gimnasio", "Seguridad 24h", "Depósito"]
+    },
+    {
+      "id": "prop-002",
+      "titulo": "Casa campestre en Country Club",
+      "tipo": "casa",
+      "modalidad": "venta",
+      "precio": 2100000000,
+      "moneda": "COP",
+      "area": 380,
+      "habitaciones": 5,
+      "banos": 4,
+      "parqueadero": true,
+      "piso": null,
+      "zona": {
+        "id": "zona-006",
+        "nombre": "Country Club",
+        "localidad": "Usaquén",
+        "codigoPostal": "110121",
+        "estrato": "5-6"
+      },
+      "direccion": "Carrera 7 # 152-68",
+      "codigoPostal": "110121",
+      "coordenadas": { "lat": 4.7234, "lng": -74.0312 },
+      "descripcionCorta": "Exclusiva casa con jardín privado, piscina y amplios espacios para toda la familia.",
+      "descripcionCompleta": "Casa de 380m² en lote de 600m² con 5 habitaciones, sala de estar, comedor, estudio, cocina integral con isla. Jardín con piscina climatizada, BBQ y zona verde. 4 parqueaderos cubiertos.",
+      "imagenPrincipal": "/mocks/prop2/WhatsApp Image 2025-12-31 at 3.18.17 PM (2).jpeg",
+      "imagenes": [
+        "/mocks/prop2/WhatsApp Image 2025-12-31 at 3.18.17 PM (3).jpeg"
+      ],
+      "esNuevo": false,
+      "esDestacado": true,
+      "fechaPublicacion": "2025-12-15",
+      "caracteristicas": ["Piscina", "Jardín", "Seguridad 24h", "Estudio", "Chimenea"]
+    },
+    {
+      "id": "prop-003",
+      "titulo": "Apartaestudio moderno en La Carolina",
+      "tipo": "apartaestudio",
+      "modalidad": "arriendo",
+      "precio": 2200000,
+      "moneda": "COP",
+      "area": 42,
+      "habitaciones": 1,
+      "banos": 1,
+      "parqueadero": false,
+      "piso": 8,
+      "zona": {
+        "id": "zona-002",
+        "nombre": "La Carolina",
+        "localidad": "Usaquén",
+        "codigoPostal": "110121",
+        "estrato": "4-5"
+      },
+      "direccion": "Calle 127A # 53-28",
+      "codigoPostal": "110121",
+      "coordenadas": { "lat": 4.7012, "lng": -74.0534 },
+      "descripcionCorta": "Apartaestudio con excelente iluminación, cerca al Centro Comercial Unicentro.",
+      "descripcionCompleta": "Moderno apartaestudio de 42m² con cocina abierta, zona de lavandería, closet amplio y baño completo. Edificio con portería 24 horas. A 5 minutos de Unicentro.",
+      "imagenPrincipal": "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.19 PM.jpeg",
+      "imagenes": [],
+      "esNuevo": true,
+      "esDestacado": false,
+      "fechaPublicacion": "2025-12-30",
+      "caracteristicas": ["Seguridad 24h"]
+    },
+    {
+      "id": "prop-004",
+      "titulo": "Penthouse con terraza en El Retiro",
+      "tipo": "apartamento",
+      "modalidad": "venta",
+      "precio": 1450000000,
+      "moneda": "COP",
+      "area": 210,
+      "habitaciones": 4,
+      "banos": 4,
+      "parqueadero": true,
+      "piso": 18,
+      "zona": {
+        "id": "zona-003",
+        "nombre": "El Retiro",
+        "localidad": "Chapinero",
+        "codigoPostal": "110221",
+        "estrato": "5-6"
+      },
+      "direccion": "Carrera 11 # 84-42 PH",
+      "codigoPostal": "110221",
+      "coordenadas": { "lat": 4.6678, "lng": -74.0523 },
+      "descripcionCorta": "Penthouse de lujo con terraza privada de 80m² y vista 360° a la ciudad.",
+      "descripcionCompleta": "Espectacular penthouse dúplex de 210m² + terraza de 80m². 4 habitaciones con baño privado, estudio, sala-comedor con doble altura, cocina de diseño. Terraza con jacuzzi y zona BBQ. 3 parqueaderos.",
+      "imagenPrincipal": "/mocks/prop2/WhatsApp Image 2025-12-31 at 3.18.17 PM (4).jpeg",
+      "imagenes": [
+        "/mocks/prop2/WhatsApp Image 2025-12-31 at 3.18.17 PM (5).jpeg"
+      ],
+      "esNuevo": false,
+      "esDestacado": true,
+      "fechaPublicacion": "2025-12-10",
+      "caracteristicas": ["Vista panorámica", "Terraza", "Jacuzzi", "Estudio", "Chimenea"]
+    },
+    {
+      "id": "prop-005",
+      "titulo": "Apartamento familiar en San Patricio",
+      "tipo": "apartamento",
+      "modalidad": "arriendo",
+      "precio": 5500000,
+      "moneda": "COP",
+      "area": 125,
+      "habitaciones": 3,
+      "banos": 2,
+      "parqueadero": true,
+      "piso": 5,
+      "zona": {
+        "id": "zona-004",
+        "nombre": "San Patricio",
+        "localidad": "Usaquén",
+        "codigoPostal": "110121",
+        "estrato": "4-6"
+      },
+      "direccion": "Calle 106 # 17A-22",
+      "codigoPostal": "110121",
+      "coordenadas": { "lat": 4.6912, "lng": -74.0456 },
+      "descripcionCorta": "Amplio apartamento ideal para familias, cerca a colegios y parques.",
+      "descripcionCompleta": "Apartamento de 125m² con 3 habitaciones, 2 baños, sala-comedor, cocina semi-integral y zona de lavandería. Parqueadero cubierto y depósito. Conjunto cerrado con zonas verdes y parque infantil.",
+      "imagenPrincipal": "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (6).jpeg",
+      "imagenes": [
+        "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (7).jpeg"
+      ],
+      "esNuevo": false,
+      "esDestacado": false,
+      "fechaPublicacion": "2025-12-20",
+      "caracteristicas": ["Seguridad 24h", "Depósito", "Balcón"]
+    },
+    {
+      "id": "prop-006",
+      "titulo": "Local comercial en Usaquén Centro",
+      "tipo": "local",
+      "modalidad": "arriendo",
+      "precio": 8500000,
+      "moneda": "COP",
+      "area": 95,
+      "habitaciones": null,
+      "banos": 2,
+      "parqueadero": false,
+      "piso": 1,
+      "zona": {
+        "id": "zona-005",
+        "nombre": "Usaquén Centro",
+        "localidad": "Usaquén",
+        "codigoPostal": "110121",
+        "estrato": "4-6"
+      },
+      "direccion": "Carrera 6A # 119B-52",
+      "codigoPostal": "110121",
+      "coordenadas": { "lat": 4.6956, "lng": -74.0312 },
+      "descripcionCorta": "Local esquinero con alto flujo peatonal, ideal para restaurante o tienda.",
+      "descripcionCompleta": "Local comercial de 95m² en esquina, con vitrina de 8 metros lineales, 2 baños (uno adaptado para discapacitados), bodega y mezanine. Zona de alto tráfico cerca a la plaza de Usaquén.",
+      "imagenPrincipal": "/mocks/prop2/WhatsApp Image 2025-12-31 at 3.18.19 PM (1).jpeg",
+      "imagenes": [],
+      "esNuevo": true,
+      "esDestacado": false,
+      "fechaPublicacion": "2025-12-29",
+      "caracteristicas": []
+    },
+    {
+      "id": "prop-007",
+      "titulo": "Apartamento renovado en Los Cedros",
+      "tipo": "apartamento",
+      "modalidad": "venta",
+      "precio": 520000000,
+      "moneda": "COP",
+      "area": 98,
+      "habitaciones": 3,
+      "banos": 2,
+      "parqueadero": true,
+      "piso": 3,
+      "zona": {
+        "id": "zona-007",
+        "nombre": "Los Cedros",
+        "localidad": "Usaquén",
+        "codigoPostal": "110121",
+        "estrato": "4-5"
+      },
+      "direccion": "Calle 140 # 13-45",
+      "codigoPostal": "110121",
+      "coordenadas": { "lat": 4.7145, "lng": -74.0398 },
+      "descripcionCorta": "Apartamento completamente remodelado con acabados modernos y excelente precio.",
+      "descripcionCompleta": "Apartamento de 98m² totalmente renovado. 3 habitaciones, 2 baños, cocina tipo americano con electrodomésticos, pisos en porcelanato. Parqueadero cubierto. Conjunto con vigilancia.",
+      "imagenPrincipal": "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM.jpeg",
+      "imagenes": [
+        "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (1).jpeg"
+      ],
+      "esNuevo": false,
+      "esDestacado": true,
+      "fechaPublicacion": "2025-12-18",
+      "caracteristicas": ["Seguridad 24h", "Balcón"]
+    },
+    {
+      "id": "prop-008",
+      "titulo": "Casa tradicional en Santa Bárbara Oriental",
+      "tipo": "casa",
+      "modalidad": "venta",
+      "precio": 1850000000,
+      "moneda": "COP",
+      "area": 320,
+      "habitaciones": 4,
+      "banos": 4,
+      "parqueadero": true,
+      "piso": null,
+      "zona": {
+        "id": "zona-001",
+        "nombre": "Santa Bárbara",
+        "localidad": "Usaquén",
+        "codigoPostal": "110121",
+        "estrato": "5-6"
+      },
+      "direccion": "Carrera 18 # 127-15",
+      "codigoPostal": "110121",
+      "coordenadas": { "lat": 4.7067, "lng": -74.0512 },
+      "descripcionCorta": "Elegante casa de estilo inglés con jardín interior y acabados en madera.",
+      "descripcionCompleta": "Casa de 320m² en 3 niveles. 4 habitaciones con baño privado, sala principal con chimenea, comedor formal, estudio-biblioteca, cocina integral. Jardín interior con fuente. 3 parqueaderos.",
+      "imagenPrincipal": "/mocks/prop2/WhatsApp Image 2025-12-31 at 3.18.17 PM (2).jpeg",
+      "imagenes": [
+        "/mocks/prop2/WhatsApp Image 2025-12-31 at 3.18.17 PM (3).jpeg",
+        "/mocks/prop2/WhatsApp Image 2025-12-31 at 3.18.17 PM (4).jpeg"
+      ],
+      "esNuevo": false,
+      "esDestacado": false,
+      "fechaPublicacion": "2025-11-25",
+      "caracteristicas": ["Jardín", "Chimenea", "Estudio", "Seguridad 24h"]
+    },
+    {
+      "id": "prop-009",
+      "titulo": "Apartamento con vista en La Carolina",
+      "tipo": "apartamento",
+      "modalidad": "arriendo",
+      "precio": 4200000,
+      "moneda": "COP",
+      "area": 105,
+      "habitaciones": 2,
+      "banos": 2,
+      "parqueadero": true,
+      "piso": 15,
+      "zona": {
+        "id": "zona-002",
+        "nombre": "La Carolina",
+        "localidad": "Usaquén",
+        "codigoPostal": "110121",
+        "estrato": "4-5"
+      },
+      "direccion": "Calle 127 # 46-12",
+      "codigoPostal": "110121",
+      "coordenadas": { "lat": 4.7023, "lng": -74.0589 },
+      "descripcionCorta": "Apartamento con espectacular vista a los cerros, amoblado y listo para habitar.",
+      "descripcionCompleta": "Apartamento amoblado de 105m² con 2 habitaciones, cada una con baño y walking closet. Sala-comedor con vista panorámica, cocina integral equipada. Incluye parqueadero y depósito.",
+      "imagenPrincipal": "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.17 PM (8).jpeg",
+      "imagenes": [],
+      "esNuevo": true,
+      "esDestacado": false,
+      "fechaPublicacion": "2025-12-31",
+      "caracteristicas": ["Vista panorámica", "Gimnasio", "Seguridad 24h", "Depósito"]
+    },
+    {
+      "id": "prop-010",
+      "titulo": "Dúplex moderno en El Retiro",
+      "tipo": "apartamento",
+      "modalidad": "venta",
+      "precio": 780000000,
+      "moneda": "COP",
+      "area": 135,
+      "habitaciones": 3,
+      "banos": 2,
+      "parqueadero": true,
+      "piso": 6,
+      "zona": {
+        "id": "zona-003",
+        "nombre": "El Retiro",
+        "localidad": "Chapinero",
+        "codigoPostal": "110221",
+        "estrato": "5-6"
+      },
+      "direccion": "Carrera 15 # 88-32",
+      "codigoPostal": "110221",
+      "coordenadas": { "lat": 4.6701, "lng": -74.0567 },
+      "descripcionCorta": "Dúplex de diseño contemporáneo con doble altura y acabados de primera.",
+      "descripcionCompleta": "Dúplex de 135m² con diseño vanguardista. Primer nivel: sala con doble altura, comedor, cocina abierta, baño social. Segundo nivel: 3 habitaciones, baño principal con tina. 2 parqueaderos.",
+      "imagenPrincipal": "/mocks/prop2/WhatsApp Image 2025-12-31 at 3.18.17 PM (5).jpeg",
+      "imagenes": [
+        "/mocks/prop2/WhatsApp Image 2025-12-31 at 3.18.17 PM (6).jpeg"
+      ],
+      "esNuevo": false,
+      "esDestacado": true,
+      "fechaPublicacion": "2025-12-12",
+      "caracteristicas": ["Terraza", "Gimnasio", "Seguridad 24h"]
+    }
+  ],
+  "busquedasGuardadas": [
+    {
+      "id": "busq-001",
+      "nombre": "Apartamentos en Santa Bárbara",
+      "fechaCreacion": "2025-12-20",
+      "filtros": {
+        "zonaIds": ["zona-001"],
+        "tipos": ["apartamento"],
+        "modalidad": "venta",
+        "precioMin": 500000000,
+        "precioMax": 1000000000,
+        "habitacionesMin": 2,
+        "banosMin": 2,
+        "parqueadero": true
+      },
+      "alertaActiva": true
+    },
+    {
+      "id": "busq-002",
+      "nombre": "Arriendos cerca a Unicentro",
+      "fechaCreacion": "2025-12-25",
+      "filtros": {
+        "zonaIds": ["zona-002"],
+        "tipos": ["apartamento", "apartaestudio"],
+        "modalidad": "arriendo",
+        "precioMax": 3500000
+      },
+      "alertaActiva": false
+    },
+    {
+      "id": "busq-003",
+      "nombre": "Casas grandes",
+      "fechaCreacion": "2025-12-28",
+      "filtros": {
+        "tipos": ["casa"],
+        "modalidad": "venta",
+        "areaMin": 200,
+        "habitacionesMin": 4
+      },
+      "alertaActiva": true
+    }
+  ],
+  "usuario": {
+    "id": "user-001",
+    "nombre": "María García",
+    "email": "maria.garcia@email.com",
+    "estaAutenticado": true,
+    "propiedadesFavoritas": ["prop-001", "prop-004", "prop-007", "prop-002", "prop-010"]
+  },
+  "mapa": {
+    "centro": { "lat": 4.6950, "lng": -74.0450 },
+    "zoom": 13,
+    "apiKeyPlaceholder": "YOUR_GOOGLE_MAPS_API_KEY"
+  },
+  "resultados": {
+    "total": 10,
+    "paginaActual": 1,
+    "porPagina": 12,
+    "totalPaginas": 1
+  }
+}
