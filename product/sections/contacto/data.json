@@ -1,0 +1,112 @@
+{
+  "_meta": {
+    "models": {
+      "hero": "Hero section with headline and subheadline",
+      "formConfig": "Contact form configuration including field labels and options",
+      "oficina": "Office information including address, contact details, and hours",
+      "mapa": "Google Maps configuration"
+    }
+  },
+  "hero": {
+    "headline": "Contáctenos",
+    "subheadline": "Estamos aquí para ayudarle a encontrar la propiedad perfecta o gestionar la suya.",
+    "backgroundImage": "/mocks/zonas/santa-barbara.jpg"
+  },
+  "formConfig": {
+    "titulo": "Envíenos un Mensaje",
+    "campos": {
+      "nombre": {
+        "label": "Nombre Completo",
+        "placeholder": "Ingrese su nombre",
+        "required": true
+      },
+      "email": {
+        "label": "Correo Electrónico",
+        "placeholder": "ejemplo@correo.com",
+        "required": true
+      },
+      "telefono": {
+        "label": "Teléfono",
+        "placeholder": "+57 300 000 0000",
+        "required": true
+      },
+      "tipoConsulta": {
+        "label": "¿En qué podemos ayudarle?",
+        "required": true,
+        "opciones": [
+          { "value": "comprar", "label": "Quiero comprar una propiedad" },
+          { "value": "vender", "label": "Quiero vender mi propiedad" },
+          { "value": "arrendar", "label": "Quiero arrendar una propiedad" },
+          { "value": "gestionar", "label": "Necesito gestión de mi propiedad" },
+          { "value": "otro", "label": "Otra consulta" }
+        ]
+      },
+      "metodoContacto": {
+        "label": "¿Cómo prefiere que le contactemos?",
+        "required": true,
+        "opciones": [
+          { "value": "email", "label": "Correo Electrónico" },
+          { "value": "telefono", "label": "Llamada Telefónica" },
+          { "value": "whatsapp", "label": "WhatsApp" }
+        ]
+      },
+      "mensaje": {
+        "label": "Mensaje",
+        "placeholder": "Cuéntenos más sobre lo que busca...",
+        "required": false
+      },
+      "cita": {
+        "label": "Agendar una Cita (Opcional)",
+        "fechaLabel": "Fecha preferida",
+        "horaLabel": "Hora preferida",
+        "horasDisponibles": [
+          "09:00",
+          "10:00",
+          "11:00",
+          "12:00",
+          "14:00",
+          "15:00",
+          "16:00",
+          "17:00"
+        ]
+      },
+      "consentimiento": {
+        "label": "Acepto el tratamiento de mis datos personales según la política de privacidad",
+        "required": true
+      }
+    },
+    "submitText": "Enviar Mensaje",
+    "successMessage": "¡Gracias por contactarnos! Le responderemos en menos de 24 horas."
+  },
+  "oficina": {
+    "titulo": "Nuestra Oficina",
+    "direccion": {
+      "linea1": "Calle 116 #18-50, Oficina 302",
+      "linea2": "Santa Bárbara, Bogotá D.C.",
+      "codigoPostal": "110111"
+    },
+    "telefono": "+57 (1) 234 5678",
+    "celular": "+57 300 123 4567",
+    "email": "info@bienesraices.co",
+    "whatsapp": {
+      "numero": "+57 300 123 4567",
+      "mensaje": "Hola, me gustaría obtener más información sobre sus servicios."
+    },
+    "horario": {
+      "titulo": "Horario de Atención",
+      "dias": [
+        { "dia": "Lunes - Viernes", "horas": "8:00 AM - 6:00 PM" },
+        { "dia": "Sábados", "horas": "9:00 AM - 1:00 PM" },
+        { "dia": "Domingos", "horas": "Cerrado" }
+      ]
+    }
+  },
+  "mapa": {
+    "centro": {
+      "lat": 4.6907,
+      "lng": -74.0465
+    },
+    "zoom": 16,
+    "apiKeyPlaceholder": "YOUR_GOOGLE_MAPS_API_KEY"
+  }
+}

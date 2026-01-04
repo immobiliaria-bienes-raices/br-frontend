@@ -1,3 +1,6 @@
+'use client'
+
+import { useState, useEffect, useRef } from 'react'
 import type { Hero } from '@/../product/sections/pagina-de-inicio/types'
 
 interface HeroSectionProps {
@@ -7,16 +10,72 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ hero, onExplorarPropiedades, onVerServicios }: HeroSectionProps) {
+  const hasVideos = hero.backgroundVideos && hero.backgroundVideos.length > 0
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
+  const transitionDuration = hero.videoTransitionDuration || 10
+
+  // Auto-slide videos
+  useEffect(() => {
+    if (!hasVideos || hero.backgroundVideos!.length <= 1) return
+
+    const interval = setInterval(() => {
+      setIsTransitioning(true)
+      setTimeout(() => {
+        setCurrentVideoIndex((prev) => (prev + 1) % hero.backgroundVideos!.length)
+        setIsTransitioning(false)
+      }, 1000) // Crossfade duration
+    }, transitionDuration * 1000)
+
+    return () => clearInterval(interval)
+  }, [hasVideos, hero.backgroundVideos, transitionDuration])
+
+  // Ensure videos play
+  useEffect(() => {
+    videoRefs.current.forEach((video) => {
+      if (video) {
+        video.play().catch(() => {
+          // Autoplay might be blocked, that's okay
+        })
+      }
+    })
+  }, [])
+
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-      {/* Background Image with Elegant Overlay */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background - Video or Image */}
       <div className="absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center scale-105 animate-subtle-zoom"
-          style={{ backgroundImage: `url(${hero.backgroundImage})` }}
-        />
+        {hasVideos ? (
+          // Video Background with Crossfade
+          <>
+            {hero.backgroundVideos!.map((videoSrc, index) => (
+              <video
+                key={index}
+                ref={(el) => { videoRefs.current[index] = el }}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                  index === currentVideoIndex && !isTransitioning
+                    ? 'opacity-100'
+                    : 'opacity-0'
+                }`}
+                src={videoSrc}
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+            ))}
+          </>
+        ) : (
+          // Fallback Image Background
+          <div
+            className="absolute inset-0 bg-cover bg-center scale-105 animate-subtle-zoom"
+            style={{ backgroundImage: `url(${hero.backgroundImage})` }}
+          />
+        )}
+
         {/* Sophisticated gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/50 to-slate-900/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-slate-900/70" />
         {/* Subtle vignette effect */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.3)_100%)]" />
       </div>

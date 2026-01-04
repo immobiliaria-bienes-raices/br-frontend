@@ -15,11 +15,15 @@
     ]
   },
   "hero": {
-    "headline": "Encuentra tu hogar ideal en Bogotá",
+    "headline": "Encuentra Tu Hogar Ideal en Bogotá",
     "subheadline": "Apartamentos, casas y locales comerciales con servicio integral de intermediación inmobiliaria",
-    "ctaText": "Explorar Propiedades",
+    "ctaText": "Ver Propiedades",
     "ctaSecondary": "Conoce Nuestros Servicios",
     "backgroundImage": "/mocks/prop1/WhatsApp Image 2025-12-31 at 3.18.16 PM.jpeg",
+    "backgroundVideos": [
+      "/mocks/videos/santaBarbaraTest.mp4"
+    ],
+    "videoTransitionDuration": 10,
     "logo": "/assets/logo.svg"
   },
   "equipo": [

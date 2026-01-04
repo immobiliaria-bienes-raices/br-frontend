@@ -1,68 +1,17 @@
+'use client'
+
 import { useState, useMemo } from 'react'
 import {
-  Grid3X3,
-  Map,
   ChevronDown,
-  Bookmark,
   ChevronLeft,
   ChevronRight,
+  List,
 } from 'lucide-react'
-import type { CatalogoPropiedadesProps, FiltrosActivos, Propiedad } from '@/../product/sections/catalogo-propiedades/types'
+import type { CatalogoPropiedadesProps, FiltrosActivos } from '@/../product/sections/catalogo-propiedades/types'
 import { PropiedadCatalogoCard } from './PropiedadCatalogoCard'
 import { FilterBar } from './FilterBar'
-import { MapaView } from './MapaView'
 import { GuardarBusquedaModal } from './GuardarBusquedaModal'
 import { BusquedasGuardadasPanel } from './BusquedasGuardadasPanel'
-
-// =============================================================================
-// View Mode Toggle
-// =============================================================================
-
-type ViewMode = 'grid' | 'map' | 'split'
-
-interface ViewToggleProps {
-  mode: ViewMode
-  onChange: (mode: ViewMode) => void
-}
-
-function ViewToggle({ mode, onChange }: ViewToggleProps) {
-  return (
-    <div className="flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg p-1">
-      <button
-        onClick={() => onChange('grid')}
-        className={`flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-          mode === 'grid'
-            ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
-            : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-        }`}
-      >
-        <Grid3X3 className="w-4 h-4" />
-        <span className="hidden sm:inline">Lista</span>
-      </button>
-      <button
-        onClick={() => onChange('split')}
-        className={`flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-          mode === 'split'
-            ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
-            : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-        }`}
-      >
-        <span className="hidden sm:inline">Split</span>
-      </button>
-      <button
-        onClick={() => onChange('map')}
-        className={`flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-          mode === 'map'
-            ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
-            : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-        }`}
-      >
-        <Map className="w-4 h-4" />
-        <span className="hidden sm:inline">Mapa</span>
-      </button>
-    </div>
-  )
-}
 
 // =============================================================================
 // Sort Dropdown
@@ -201,7 +150,7 @@ function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) 
 }
 
 // =============================================================================
-// Main Component
+// Main Component - LIST VIEW ONLY
 // =============================================================================
 
 export function CatalogoPropiedades({
@@ -211,7 +160,6 @@ export function CatalogoPropiedades({
   ordenOpciones,
   busquedasGuardadas,
   usuario,
-  mapa,
   resultados,
   filtrosActivos = {},
   ordenActivo = 'recientes',
@@ -223,12 +171,9 @@ export function CatalogoPropiedades({
   onEliminarBusqueda,
   onCargarBusqueda,
   onToggleAlerta,
-  onMapMarkerClick,
   onResetFiltros,
   onPageChange,
 }: CatalogoPropiedadesProps) {
-  const [viewMode, setViewMode] = useState<ViewMode>('split')
-  const [selectedPropertyId, setSelectedPropertyId] = useState<string | null>(null)
   const [showSaveModal, setShowSaveModal] = useState(false)
   const [showSavedSearches, setShowSavedSearches] = useState(false)
 
@@ -325,35 +270,28 @@ export function CatalogoPropiedades({
     return filtered
   }, [propiedades, filtrosActivos, ordenActivo])
 
-  const handleMapMarkerClick = (id: string) => {
-    setSelectedPropertyId(id)
-    onMapMarkerClick?.(id)
-  }
-
   const handleSaveSearch = (nombre: string) => {
     onGuardarBusqueda?.(nombre, filtrosActivos)
   }
 
-  const hasActiveFilters = Object.keys(filtrosActivos).some(
-    (key) => filtrosActivos[key as keyof FiltrosActivos] !== undefined
-  )
-
   return (
     <div className="min-h-screen bg-[#F5F2F2] dark:bg-slate-950">
-      {/* Filter Bar */}
+      {/* Filter Bar - E&V Style with dark background */}
       <FilterBar
         zonas={zonas}
         filtros={filtros}
         filtrosActivos={filtrosActivos}
         onFiltrosChange={onFiltrosChange}
         onReset={onResetFiltros}
+        onGuardarBusqueda={() => setShowSaveModal(true)}
+        isLoggedIn={usuario.estaAutenticado}
       />
 
-      {/* Toolbar */}
+      {/* Toolbar - Results count & Sort */}
       <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
         <div className="container mx-auto px-4 lg:px-6 py-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            {/* Results Count & Actions */}
+            {/* Results Count & Saved Searches Toggle */}
             <div className="flex items-center gap-4">
               <p className="text-sm text-slate-600 dark:text-slate-400">
                 <span className="font-semibold text-slate-900 dark:text-white">
@@ -362,17 +300,6 @@ export function CatalogoPropiedades({
                 {displayedProperties.length === 1 ? 'propiedad' : 'propiedades'}{' '}
                 encontrada{displayedProperties.length !== 1 ? 's' : ''}
               </p>
-
-              {/* Save Search Button (logged in only) */}
-              {usuario.estaAutenticado && hasActiveFilters && (
-                <button
-                  onClick={() => setShowSaveModal(true)}
-                  className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-[#722F37] hover:bg-[#722F37]/10 rounded-lg transition-colors"
-                >
-                  <Bookmark className="w-4 h-4" />
-                  <span className="hidden sm:inline">Guardar búsqueda</span>
-                </button>
-              )}
 
               {/* Saved Searches Toggle (logged in only) */}
               {usuario.estaAutenticado && busquedasGuardadas.length > 0 && (
@@ -389,15 +316,12 @@ export function CatalogoPropiedades({
               )}
             </div>
 
-            {/* View & Sort Controls */}
-            <div className="flex items-center gap-3 w-full sm:w-auto">
-              <ViewToggle mode={viewMode} onChange={setViewMode} />
-              <SortDropdown
-                options={ordenOpciones}
-                value={ordenActivo}
-                onChange={onOrdenChange}
-              />
-            </div>
+            {/* Sort Controls */}
+            <SortDropdown
+              options={ordenOpciones}
+              value={ordenActivo}
+              onChange={onOrdenChange}
+            />
           </div>
         </div>
       </div>
@@ -419,13 +343,13 @@ export function CatalogoPropiedades({
         </div>
       )}
 
-      {/* Main Content */}
+      {/* Main Content - LIST VIEW ONLY */}
       <div className="container mx-auto px-4 lg:px-6 py-6">
         {displayedProperties.length === 0 ? (
           /* Empty State */
           <div className="text-center py-16">
             <div className="w-20 h-20 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mx-auto mb-6">
-              <Grid3X3 className="w-10 h-10 text-slate-400 dark:text-slate-500" />
+              <List className="w-10 h-10 text-slate-400 dark:text-slate-500" />
             </div>
             <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
               No se encontraron propiedades
@@ -441,9 +365,9 @@ export function CatalogoPropiedades({
               Limpiar todos los filtros
             </button>
           </div>
-        ) : viewMode === 'grid' ? (
-          /* Grid View */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        ) : (
+          /* Property List */
+          <div className="space-y-4">
             {displayedProperties.map((propiedad) => (
               <PropiedadCatalogoCard
                 key={propiedad.id}
@@ -453,57 +377,6 @@ export function CatalogoPropiedades({
                 onToggleFavorito={() => onToggleFavorito?.(propiedad.id)}
               />
             ))}
-          </div>
-        ) : viewMode === 'map' ? (
-          /* Map View */
-          <div className="h-[calc(100vh-280px)] min-h-[500px] rounded-xl overflow-hidden shadow-lg">
-            <MapaView
-              propiedades={displayedProperties}
-              config={mapa}
-              selectedId={selectedPropertyId || undefined}
-              onMarkerClick={handleMapMarkerClick}
-            />
-          </div>
-        ) : (
-          /* Split View */
-          <div className="flex flex-col lg:flex-row gap-6 h-[calc(100vh-280px)] min-h-[600px]">
-            {/* Property Grid */}
-            <div className="lg:w-1/2 overflow-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {displayedProperties.map((propiedad) => (
-                  <div
-                    key={propiedad.id}
-                    className={`transition-all ${
-                      selectedPropertyId === propiedad.id
-                        ? 'ring-2 ring-[#722F37] rounded-lg'
-                        : ''
-                    }`}
-                  >
-                    <PropiedadCatalogoCard
-                      propiedad={propiedad}
-                      esFavorito={usuario.propiedadesFavoritas.includes(
-                        propiedad.id
-                      )}
-                      onView={() => {
-                        setSelectedPropertyId(propiedad.id)
-                        onViewPropiedad?.(propiedad.id)
-                      }}
-                      onToggleFavorito={() => onToggleFavorito?.(propiedad.id)}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Map */}
-            <div className="lg:w-1/2 h-full min-h-[400px] lg:min-h-0 rounded-xl overflow-hidden shadow-lg">
-              <MapaView
-                propiedades={displayedProperties}
-                config={mapa}
-                selectedId={selectedPropertyId || undefined}
-                onMarkerClick={handleMapMarkerClick}
-              />
-            </div>
           </div>
         )}
 

@@ -1,13 +1,19 @@
+'use client'
+
 import { useState, useMemo } from 'react'
 import {
   ChevronDown,
+  ChevronUp,
   X,
-  SlidersHorizontal,
+  MapPin,
+  Plus,
+  Minus,
+  Bookmark,
   RotateCcw,
+  SlidersHorizontal,
   Check,
-  Search,
 } from 'lucide-react'
-import type { FilterBarProps, FiltrosActivos, Zona, FiltroOpcion } from '@/../product/sections/catalogo-propiedades/types'
+import type { FilterBarProps, FiltrosActivos } from '@/../product/sections/catalogo-propiedades/types'
 
 // =============================================================================
 // Utility Functions
@@ -29,7 +35,6 @@ function countActiveFilters(filtros?: FiltrosActivos): number {
   if (filtros.zonaIds?.length) count++
   if (filtros.codigoPostal) count++
   if (filtros.tipos?.length) count++
-  if (filtros.modalidad) count++
   if (filtros.precioMin || filtros.precioMax) count++
   if (filtros.areaMin || filtros.areaMax) count++
   if (filtros.habitacionesMin) count++
@@ -40,169 +45,62 @@ function countActiveFilters(filtros?: FiltrosActivos): number {
 }
 
 // =============================================================================
-// Dropdown Component
+// Increment/Decrement Counter Component
 // =============================================================================
 
-interface DropdownProps {
+interface CounterProps {
   label: string
-  isActive: boolean
-  children: React.ReactNode
-  onClose?: () => void
+  value: number | undefined
+  min?: number
+  max?: number
+  onChange: (value: number | undefined) => void
 }
 
-function Dropdown({ label, isActive, children }: DropdownProps) {
-  const [isOpen, setIsOpen] = useState(false)
+function Counter({ label, value, min = 0, max = 10, onChange }: CounterProps) {
+  const currentValue = value ?? 0
 
-  return (
-    <div className="relative">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg border transition-all ${
-          isActive
-            ? 'border-[#722F37] bg-[#722F37]/5 text-[#722F37] dark:bg-[#722F37]/10'
-            : 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-600'
-        }`}
-      >
-        {label}
-        <ChevronDown
-          className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
-        />
-      </button>
-
-      {isOpen && (
-        <>
-          <div
-            className="fixed inset-0 z-40"
-            onClick={() => setIsOpen(false)}
-          />
-          <div className="absolute top-full left-0 mt-2 z-50 bg-white dark:bg-slate-900 rounded-lg shadow-xl border border-slate-200 dark:border-slate-700 min-w-[280px] max-h-[400px] overflow-auto">
-            {children}
-          </div>
-        </>
-      )}
-    </div>
-  )
-}
-
-// =============================================================================
-// Multi-Select Option
-// =============================================================================
-
-interface MultiSelectOptionProps {
-  label: string
-  isSelected: boolean
-  onClick: () => void
-}
-
-function MultiSelectOption({ label, isSelected, onClick }: MultiSelectOptionProps) {
-  return (
-    <button
-      onClick={onClick}
-      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-left hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
-    >
-      <div
-        className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${
-          isSelected
-            ? 'bg-[#722F37] border-[#722F37]'
-            : 'border-slate-300 dark:border-slate-600'
-        }`}
-      >
-        {isSelected && <Check className="w-3 h-3 text-white" />}
-      </div>
-      <span className="text-slate-700 dark:text-slate-300">{label}</span>
-    </button>
-  )
-}
-
-// =============================================================================
-// Range Slider
-// =============================================================================
-
-interface RangeSliderProps {
-  label: string
-  min: number
-  max: number
-  step: number
-  valueMin?: number
-  valueMax?: number
-  formatLabel: (value: number) => string
-  onChange: (min?: number, max?: number) => void
-}
-
-function RangeSlider({
-  label,
-  min,
-  max,
-  step,
-  valueMin,
-  valueMax,
-  formatLabel,
-  onChange,
-}: RangeSliderProps) {
-  const [localMin, setLocalMin] = useState(valueMin ?? min)
-  const [localMax, setLocalMax] = useState(valueMax ?? max)
-
-  const handleMinChange = (value: number) => {
-    const newMin = Math.min(value, localMax - step)
-    setLocalMin(newMin)
-    onChange(newMin === min ? undefined : newMin, localMax === max ? undefined : localMax)
+  const decrement = () => {
+    if (currentValue <= min) {
+      onChange(undefined)
+    } else {
+      onChange(currentValue - 1)
+    }
   }
 
-  const handleMaxChange = (value: number) => {
-    const newMax = Math.max(value, localMin + step)
-    setLocalMax(newMax)
-    onChange(localMin === min ? undefined : localMin, newMax === max ? undefined : newMax)
+  const increment = () => {
+    if (currentValue < max) {
+      onChange(currentValue + 1)
+    }
   }
 
-  const percentMin = ((localMin - min) / (max - min)) * 100
-  const percentMax = ((localMax - min) / (max - min)) * 100
-
   return (
-    <div className="px-4 py-4">
-      <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-4">
-        {label}
-      </p>
-
-      <div className="flex items-center justify-between text-sm text-slate-600 dark:text-slate-400 mb-4">
-        <span>{formatLabel(localMin)}</span>
-        <span>-</span>
-        <span>{formatLabel(localMax)}</span>
-      </div>
-
-      <div className="relative h-2 mb-4">
-        <div className="absolute inset-0 bg-slate-200 dark:bg-slate-700 rounded-full" />
-        <div
-          className="absolute h-full bg-[#722F37] rounded-full"
-          style={{
-            left: `${percentMin}%`,
-            width: `${percentMax - percentMin}%`,
-          }}
-        />
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={localMin}
-          onChange={(e) => handleMinChange(Number(e.target.value))}
-          className="absolute inset-0 w-full appearance-none bg-transparent cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#722F37] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-md"
-        />
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={localMax}
-          onChange={(e) => handleMaxChange(Number(e.target.value))}
-          className="absolute inset-0 w-full appearance-none bg-transparent cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#722F37] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-md"
-        />
+    <div className="flex items-center gap-3">
+      <span className="text-sm text-slate-300 min-w-[80px]">{label}</span>
+      <div className="flex items-center gap-2">
+        <button
+          onClick={decrement}
+          className="w-8 h-8 rounded-full border border-slate-600 flex items-center justify-center text-slate-300 hover:bg-slate-700 hover:border-slate-500 transition-colors disabled:opacity-50"
+          disabled={currentValue <= min}
+        >
+          <Minus className="w-4 h-4" />
+        </button>
+        <span className="text-white font-medium w-8 text-center">
+          {currentValue === 0 ? '-' : `${currentValue}+`}
+        </span>
+        <button
+          onClick={increment}
+          className="w-8 h-8 rounded-full border border-slate-600 flex items-center justify-center text-slate-300 hover:bg-slate-700 hover:border-slate-500 transition-colors disabled:opacity-50"
+          disabled={currentValue >= max}
+        >
+          <Plus className="w-4 h-4" />
+        </button>
       </div>
     </div>
   )
 }
 
 // =============================================================================
-// Filter Chip
+// Filter Chip Component
 // =============================================================================
 
 interface FilterChipProps {
@@ -212,11 +110,11 @@ interface FilterChipProps {
 
 function FilterChip({ label, onRemove }: FilterChipProps) {
   return (
-    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#722F37]/10 text-[#722F37] text-sm font-medium rounded-full">
+    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#722F37]/20 text-[#722F37] text-sm font-medium rounded-full border border-[#722F37]/30">
       {label}
       <button
         onClick={onRemove}
-        className="p-0.5 hover:bg-[#722F37]/20 rounded-full transition-colors"
+        className="p-0.5 hover:bg-[#722F37]/30 rounded-full transition-colors"
       >
         <X className="w-3.5 h-3.5" />
       </button>
@@ -225,7 +123,7 @@ function FilterChip({ label, onRemove }: FilterChipProps) {
 }
 
 // =============================================================================
-// Main FilterBar Component
+// Main FilterBar Component (E&V Style)
 // =============================================================================
 
 export function FilterBar({
@@ -234,54 +132,61 @@ export function FilterBar({
   filtrosActivos = {},
   onFiltrosChange,
   onReset,
-}: FilterBarProps) {
+  onGuardarBusqueda,
+  isLoggedIn = false,
+}: FilterBarProps & { onGuardarBusqueda?: () => void; isLoggedIn?: boolean }) {
+  const [isExpanded, setIsExpanded] = useState(false)
+  const [locationSearch, setLocationSearch] = useState('')
+  const [showLocationDropdown, setShowLocationDropdown] = useState(false)
+  const [showTipoDropdown, setShowTipoDropdown] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
+
+  // Local state for pending changes (applied on "Aplicar" click)
+  const [pendingFilters, setPendingFilters] = useState<FiltrosActivos>(filtrosActivos)
 
   const activeCount = countActiveFilters(filtrosActivos)
 
   // Filter zonas based on search
   const filteredZonas = useMemo(() => {
-    if (!searchQuery) return zonas
-    const query = searchQuery.toLowerCase()
+    if (!locationSearch) return zonas
+    const query = locationSearch.toLowerCase()
     return zonas.filter(
       (z) =>
         z.nombre.toLowerCase().includes(query) ||
         z.localidad.toLowerCase().includes(query) ||
         z.codigoPostal.includes(query)
     )
-  }, [zonas, searchQuery])
+  }, [zonas, locationSearch])
 
-  // Handler functions
-  const updateFilter = (updates: Partial<FiltrosActivos>) => {
-    onFiltrosChange?.({ ...filtrosActivos, ...updates })
+  // Update pending filter
+  const updatePending = (updates: Partial<FiltrosActivos>) => {
+    setPendingFilters((prev) => ({ ...prev, ...updates }))
   }
 
+  // Apply filters
+  const applyFilters = () => {
+    onFiltrosChange?.(pendingFilters)
+  }
+
+  // Toggle zona selection
   const toggleZona = (zonaId: string) => {
-    const current = filtrosActivos.zonaIds || []
+    const current = pendingFilters.zonaIds || []
     const updated = current.includes(zonaId)
       ? current.filter((id) => id !== zonaId)
       : [...current, zonaId]
-    updateFilter({ zonaIds: updated.length ? updated : undefined })
+    updatePending({ zonaIds: updated.length ? updated : undefined })
   }
 
-  const toggleTipo = (tipoId: string) => {
-    const current = filtrosActivos.tipos || []
-    const updated = current.includes(tipoId)
-      ? current.filter((id) => id !== tipoId)
-      : [...current, tipoId]
-    updateFilter({ tipos: updated.length ? updated : undefined })
-  }
+  // Get selected zona names
+  const selectedZonaNames = useMemo(() => {
+    if (!pendingFilters.zonaIds?.length) return ''
+    return pendingFilters.zonaIds
+      .map((id) => zonas.find((z) => z.id === id)?.nombre)
+      .filter(Boolean)
+      .join(', ')
+  }, [pendingFilters.zonaIds, zonas])
 
-  const toggleCaracteristica = (caracteristicaId: string) => {
-    const current = filtrosActivos.caracteristicas || []
-    const updated = current.includes(caracteristicaId)
-      ? current.filter((id) => id !== caracteristicaId)
-      : [...current, caracteristicaId]
-    updateFilter({ caracteristicas: updated.length ? updated : undefined })
-  }
-
-  // Get active filter labels for chips
+  // Get active filter chips
   const getActiveChips = () => {
     const chips: { label: string; onRemove: () => void }[] = []
 
@@ -290,15 +195,8 @@ export function FilterBar({
         .map((id) => zonas.find((z) => z.id === id)?.nombre)
         .filter(Boolean)
       chips.push({
-        label: `Zonas: ${zonaNames.join(', ')}`,
-        onRemove: () => updateFilter({ zonaIds: undefined }),
-      })
-    }
-
-    if (filtrosActivos.modalidad) {
-      chips.push({
-        label: filtrosActivos.modalidad === 'venta' ? 'Venta' : 'Arriendo',
-        onRemove: () => updateFilter({ modalidad: undefined }),
+        label: `${zonaNames.join(', ')}`,
+        onRemove: () => onFiltrosChange?.({ ...filtrosActivos, zonaIds: undefined }),
       })
     }
 
@@ -308,41 +206,30 @@ export function FilterBar({
         .filter(Boolean)
       chips.push({
         label: tipoLabels.join(', '),
-        onRemove: () => updateFilter({ tipos: undefined }),
+        onRemove: () => onFiltrosChange?.({ ...filtrosActivos, tipos: undefined }),
       })
     }
 
     if (filtrosActivos.precioMin || filtrosActivos.precioMax) {
-      const min = filtrosActivos.precioMin
-        ? formatPrecioLabel(filtrosActivos.precioMin)
-        : 'Min'
-      const max = filtrosActivos.precioMax
-        ? formatPrecioLabel(filtrosActivos.precioMax)
-        : 'Max'
+      const min = filtrosActivos.precioMin ? formatPrecioLabel(filtrosActivos.precioMin) : 'Min'
+      const max = filtrosActivos.precioMax ? formatPrecioLabel(filtrosActivos.precioMax) : 'Max'
       chips.push({
-        label: `Precio: ${min} - ${max}`,
-        onRemove: () => updateFilter({ precioMin: undefined, precioMax: undefined }),
+        label: `${min} - ${max}`,
+        onRemove: () => onFiltrosChange?.({ ...filtrosActivos, precioMin: undefined, precioMax: undefined }),
       })
     }
 
     if (filtrosActivos.habitacionesMin) {
       chips.push({
         label: `${filtrosActivos.habitacionesMin}+ Hab.`,
-        onRemove: () => updateFilter({ habitacionesMin: undefined }),
+        onRemove: () => onFiltrosChange?.({ ...filtrosActivos, habitacionesMin: undefined }),
       })
     }
 
     if (filtrosActivos.banosMin) {
       chips.push({
         label: `${filtrosActivos.banosMin}+ Baños`,
-        onRemove: () => updateFilter({ banosMin: undefined }),
-      })
-    }
-
-    if (filtrosActivos.parqueadero !== undefined) {
-      chips.push({
-        label: filtrosActivos.parqueadero ? 'Con parqueadero' : 'Sin parqueadero',
-        onRemove: () => updateFilter({ parqueadero: undefined }),
+        onRemove: () => onFiltrosChange?.({ ...filtrosActivos, banosMin: undefined }),
       })
     }
 
@@ -351,17 +238,7 @@ export function FilterBar({
       const max = filtrosActivos.areaMax || filtros.areaRango.max
       chips.push({
         label: `${min} - ${max} m²`,
-        onRemove: () => updateFilter({ areaMin: undefined, areaMax: undefined }),
-      })
-    }
-
-    if (filtrosActivos.caracteristicas?.length) {
-      const labels = filtrosActivos.caracteristicas
-        .map((id) => filtros.caracteristicas.find((c) => c.id === id)?.label)
-        .filter(Boolean)
-      chips.push({
-        label: labels.join(', '),
-        onRemove: () => updateFilter({ caracteristicas: undefined }),
+        onRemove: () => onFiltrosChange?.({ ...filtrosActivos, areaMin: undefined, areaMax: undefined }),
       })
     }
 
@@ -369,268 +246,274 @@ export function FilterBar({
   }
 
   const activeChips = getActiveChips()
-  const precioRango =
-    filtrosActivos.modalidad === 'arriendo'
-      ? filtros.precioRango.arriendo
-      : filtros.precioRango.venta
 
   return (
-    <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-      {/* Desktop Filter Bar */}
-      <div className="hidden lg:block">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center gap-3 flex-wrap">
-            {/* Ubicación Dropdown */}
-            <Dropdown
-              label="Ubicación"
-              isActive={!!filtrosActivos.zonaIds?.length || !!filtrosActivos.codigoPostal}
-            >
-              <div className="p-3 border-b border-slate-100 dark:border-slate-800">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                  <input
-                    type="text"
-                    placeholder="Buscar zona o código postal..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#722F37]/20"
-                  />
-                </div>
-              </div>
-              <div className="max-h-[300px] overflow-auto">
-                {filteredZonas.map((zona) => (
-                  <MultiSelectOption
-                    key={zona.id}
-                    label={`${zona.nombre} (${zona.codigoPostal})`}
-                    isSelected={filtrosActivos.zonaIds?.includes(zona.id) || false}
-                    onClick={() => toggleZona(zona.id)}
-                  />
-                ))}
-              </div>
-            </Dropdown>
+    <div className="sticky top-0 z-40">
+      {/* ========== DESKTOP: Dark E&V Style Filter Bar ========== */}
+      <div className="hidden lg:block bg-[#1a1a1a] border-b border-slate-800">
+        {/* Primary Row */}
+        <div className="container mx-auto px-4 lg:px-6">
+          <div className="flex items-center gap-3 py-4">
+            {/* Venta / Arriendo Toggle */}
+            <div className="flex rounded-lg overflow-hidden border border-slate-700">
+              <button
+                onClick={() => updatePending({ modalidad: 'venta' })}
+                className={`px-4 py-2 text-sm font-medium transition-colors ${
+                  pendingFilters.modalidad !== 'arriendo'
+                    ? 'bg-white text-[#1a1a1a]'
+                    : 'bg-transparent text-slate-300 hover:text-white'
+                }`}
+              >
+                Venta
+              </button>
+              <button
+                onClick={() => updatePending({ modalidad: 'arriendo' })}
+                className={`px-4 py-2 text-sm font-medium transition-colors ${
+                  pendingFilters.modalidad === 'arriendo'
+                    ? 'bg-white text-[#1a1a1a]'
+                    : 'bg-transparent text-slate-300 hover:text-white'
+                }`}
+              >
+                Arriendo
+              </button>
+            </div>
 
-            {/* Tipo Dropdown */}
-            <Dropdown label="Tipo" isActive={!!filtrosActivos.tipos?.length}>
-              <div className="py-2">
-                {filtros.tipos.map((tipo) => (
-                  <MultiSelectOption
-                    key={tipo.id}
-                    label={tipo.label}
-                    isSelected={filtrosActivos.tipos?.includes(tipo.id) || false}
-                    onClick={() => toggleTipo(tipo.id)}
-                  />
-                ))}
-              </div>
-            </Dropdown>
-
-            {/* Modalidad Dropdown */}
-            <Dropdown label="Modalidad" isActive={!!filtrosActivos.modalidad}>
-              <div className="py-2">
-                {filtros.modalidades.map((mod) => (
-                  <button
-                    key={mod.id}
-                    onClick={() =>
-                      updateFilter({
-                        modalidad:
-                          filtrosActivos.modalidad === mod.id
-                            ? undefined
-                            : (mod.id as 'venta' | 'arriendo'),
-                      })
-                    }
-                    className={`w-full px-4 py-2.5 text-sm text-left hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors ${
-                      filtrosActivos.modalidad === mod.id
-                        ? 'text-[#722F37] font-medium'
-                        : 'text-slate-700 dark:text-slate-300'
-                    }`}
-                  >
-                    {mod.label}
-                  </button>
-                ))}
-              </div>
-            </Dropdown>
-
-            {/* Precio Dropdown */}
-            <Dropdown
-              label="Precio"
-              isActive={!!filtrosActivos.precioMin || !!filtrosActivos.precioMax}
-            >
-              <RangeSlider
-                label={`Rango de precio (${filtrosActivos.modalidad === 'arriendo' ? 'Arriendo' : 'Venta'})`}
-                min={precioRango.min}
-                max={precioRango.max}
-                step={precioRango.step}
-                valueMin={filtrosActivos.precioMin}
-                valueMax={filtrosActivos.precioMax}
-                formatLabel={formatPrecioLabel}
-                onChange={(min, max) => updateFilter({ precioMin: min, precioMax: max })}
+            {/* Location Search */}
+            <div className="relative flex-1 max-w-md">
+              <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <input
+                type="text"
+                placeholder="Ciudad, barrio o código postal"
+                value={locationSearch || selectedZonaNames}
+                onChange={(e) => {
+                  setLocationSearch(e.target.value)
+                  setShowLocationDropdown(true)
+                }}
+                onFocus={() => setShowLocationDropdown(true)}
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#722F37]/50 focus:border-[#722F37]"
               />
-            </Dropdown>
 
-            {/* Habitaciones Dropdown */}
-            <Dropdown label="Habitaciones" isActive={!!filtrosActivos.habitacionesMin}>
-              <div className="py-2">
-                {filtros.habitaciones.map((hab) => (
-                  <button
-                    key={hab.id}
-                    onClick={() =>
-                      updateFilter({
-                        habitacionesMin:
-                          filtrosActivos.habitacionesMin === Number(hab.id)
-                            ? undefined
-                            : Number(hab.id),
-                      })
-                    }
-                    className={`w-full px-4 py-2.5 text-sm text-left hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors ${
-                      filtrosActivos.habitacionesMin === Number(hab.id)
-                        ? 'text-[#722F37] font-medium'
-                        : 'text-slate-700 dark:text-slate-300'
-                    }`}
-                  >
-                    {hab.label}
-                  </button>
-                ))}
-              </div>
-            </Dropdown>
-
-            {/* Baños Dropdown */}
-            <Dropdown label="Baños" isActive={!!filtrosActivos.banosMin}>
-              <div className="py-2">
-                {filtros.banos.map((bano) => (
-                  <button
-                    key={bano.id}
-                    onClick={() =>
-                      updateFilter({
-                        banosMin:
-                          filtrosActivos.banosMin === Number(bano.id)
-                            ? undefined
-                            : Number(bano.id),
-                      })
-                    }
-                    className={`w-full px-4 py-2.5 text-sm text-left hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors ${
-                      filtrosActivos.banosMin === Number(bano.id)
-                        ? 'text-[#722F37] font-medium'
-                        : 'text-slate-700 dark:text-slate-300'
-                    }`}
-                  >
-                    {bano.label}
-                  </button>
-                ))}
-              </div>
-            </Dropdown>
-
-            {/* Más Filtros Dropdown */}
-            <Dropdown
-              label="Más filtros"
-              isActive={
-                filtrosActivos.parqueadero !== undefined ||
-                !!filtrosActivos.areaMin ||
-                !!filtrosActivos.areaMax ||
-                !!filtrosActivos.caracteristicas?.length
-              }
-            >
-              <div className="divide-y divide-slate-100 dark:divide-slate-800">
-                {/* Parqueadero */}
-                <div className="py-3 px-4">
-                  <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    Parqueadero
-                  </p>
-                  <div className="flex gap-2">
-                    {filtros.parqueadero.map((option) => (
+              {/* Location Dropdown */}
+              {showLocationDropdown && filteredZonas.length > 0 && (
+                <>
+                  <div className="fixed inset-0 z-40" onClick={() => setShowLocationDropdown(false)} />
+                  <div className="absolute top-full left-0 right-0 mt-1 z-50 bg-slate-800 border border-slate-700 rounded-lg shadow-xl max-h-60 overflow-auto">
+                    {filteredZonas.map((zona) => (
                       <button
-                        key={option.id}
-                        onClick={() =>
-                          updateFilter({
-                            parqueadero:
-                              (filtrosActivos.parqueadero === true && option.id === 'con') ||
-                              (filtrosActivos.parqueadero === false && option.id === 'sin')
-                                ? undefined
-                                : option.id === 'con',
-                          })
-                        }
-                        className={`px-3 py-1.5 text-sm rounded-lg border transition-colors ${
-                          (filtrosActivos.parqueadero === true && option.id === 'con') ||
-                          (filtrosActivos.parqueadero === false && option.id === 'sin')
-                            ? 'border-[#722F37] bg-[#722F37]/5 text-[#722F37]'
-                            : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-slate-300'
+                        key={zona.id}
+                        onClick={() => {
+                          toggleZona(zona.id)
+                          setLocationSearch('')
+                        }}
+                        className={`w-full px-4 py-3 text-left hover:bg-slate-700 transition-colors flex items-center justify-between ${
+                          pendingFilters.zonaIds?.includes(zona.id) ? 'bg-slate-700' : ''
                         }`}
                       >
-                        {option.label}
+                        <div>
+                          <p className="text-white font-medium">{zona.nombre}</p>
+                          <p className="text-sm text-slate-400">{zona.localidad} • {zona.codigoPostal}</p>
+                        </div>
+                        {pendingFilters.zonaIds?.includes(zona.id) && (
+                          <Check className="w-4 h-4 text-[#722F37]" />
+                        )}
                       </button>
                     ))}
                   </div>
-                </div>
+                </>
+              )}
+            </div>
 
-                {/* Área */}
-                <RangeSlider
-                  label="Área (m²)"
-                  min={filtros.areaRango.min}
-                  max={filtros.areaRango.max}
-                  step={filtros.areaRango.step}
-                  valueMin={filtrosActivos.areaMin}
-                  valueMax={filtrosActivos.areaMax}
-                  formatLabel={(v) => `${v} m²`}
-                  onChange={(min, max) => updateFilter({ areaMin: min, areaMax: max })}
-                />
+            {/* Property Type Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setShowTipoDropdown(!showTipoDropdown)}
+                className="flex items-center gap-2 px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white hover:border-slate-600 transition-colors min-w-[180px]"
+              >
+                <span className="flex-1 text-left">
+                  {pendingFilters.tipos?.length
+                    ? filtros.tipos.find((t) => t.id === pendingFilters.tipos![0])?.label
+                    : 'Tipo de propiedad'}
+                </span>
+                <ChevronDown className="w-4 h-4 text-slate-400" />
+              </button>
 
-                {/* Características */}
-                <div className="py-3">
-                  <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 px-4">
-                    Características
-                  </p>
-                  <div className="max-h-[200px] overflow-auto">
-                    {filtros.caracteristicas.map((car) => (
-                      <MultiSelectOption
-                        key={car.id}
-                        label={car.label}
-                        isSelected={
-                          filtrosActivos.caracteristicas?.includes(car.id) || false
-                        }
-                        onClick={() => toggleCaracteristica(car.id)}
-                      />
+              {showTipoDropdown && (
+                <>
+                  <div className="fixed inset-0 z-40" onClick={() => setShowTipoDropdown(false)} />
+                  <div className="absolute top-full left-0 mt-1 z-50 bg-slate-800 border border-slate-700 rounded-lg shadow-xl min-w-[200px]">
+                    {filtros.tipos.map((tipo) => (
+                      <button
+                        key={tipo.id}
+                        onClick={() => {
+                          const current = pendingFilters.tipos || []
+                          const updated = current.includes(tipo.id)
+                            ? current.filter((id) => id !== tipo.id)
+                            : [...current, tipo.id]
+                          updatePending({ tipos: updated.length ? updated : undefined })
+                        }}
+                        className={`w-full px-4 py-3 text-left hover:bg-slate-700 transition-colors flex items-center justify-between ${
+                          pendingFilters.tipos?.includes(tipo.id) ? 'bg-slate-700' : ''
+                        }`}
+                      >
+                        <span className="text-white">{tipo.label}</span>
+                        {pendingFilters.tipos?.includes(tipo.id) && (
+                          <Check className="w-4 h-4 text-[#722F37]" />
+                        )}
+                      </button>
                     ))}
                   </div>
-                </div>
-              </div>
-            </Dropdown>
+                </>
+              )}
+            </div>
 
-            {/* Reset Button */}
-            {activeCount > 0 && (
+            {/* Más Filtros Button */}
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-lg border transition-colors ${
+                isExpanded
+                  ? 'bg-[#722F37] border-[#722F37] text-white'
+                  : 'bg-slate-800 border-slate-700 text-white hover:border-slate-600'
+              }`}
+            >
+              <span>Más Filtros</span>
+              {isExpanded ? (
+                <ChevronUp className="w-4 h-4" />
+              ) : (
+                <ChevronDown className="w-4 h-4" />
+              )}
+            </button>
+
+            {/* Apply Button */}
+            <button
+              onClick={applyFilters}
+              className="px-6 py-2.5 bg-white text-[#1a1a1a] font-medium rounded-lg hover:bg-slate-100 transition-colors"
+            >
+              Aplicar
+            </button>
+
+            {/* Save Search Button - Secondary Color #722F37 */}
+            {isLoggedIn && (
               <button
-                onClick={onReset}
-                className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-[#722F37] transition-colors"
+                onClick={onGuardarBusqueda}
+                className="flex items-center gap-2 px-4 py-2.5 bg-[#722F37] text-white font-medium rounded-lg hover:bg-[#5a252c] transition-colors"
               >
-                <RotateCcw className="w-4 h-4" />
-                Limpiar filtros
+                <Bookmark className="w-4 h-4" />
+                <span>Guardar Búsqueda</span>
               </button>
             )}
           </div>
-
-          {/* Active Filter Chips */}
-          {activeChips.length > 0 && (
-            <div className="flex items-center gap-2 flex-wrap mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-              <span className="text-sm text-slate-500 dark:text-slate-400">
-                Filtros activos:
-              </span>
-              {activeChips.map((chip, index) => (
-                <FilterChip key={index} label={chip.label} onRemove={chip.onRemove} />
-              ))}
-            </div>
-          )}
         </div>
+
+        {/* Secondary Row (Expandable) */}
+        {isExpanded && (
+          <div className="border-t border-slate-800">
+            <div className="container mx-auto px-4 lg:px-6 py-4">
+              <div className="flex flex-wrap items-center gap-6">
+                {/* Price Range */}
+                <div className="flex items-center gap-3">
+                  <span className="text-sm text-slate-300">Precio</span>
+                  <input
+                    type="text"
+                    placeholder="Min"
+                    value={pendingFilters.precioMin ? formatPrecioLabel(pendingFilters.precioMin) : ''}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/\D/g, '')
+                      updatePending({ precioMin: value ? Number(value) : undefined })
+                    }}
+                    className="w-28 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#722F37]/50"
+                  />
+                  <span className="text-slate-500">-</span>
+                  <input
+                    type="text"
+                    placeholder="Max"
+                    value={pendingFilters.precioMax ? formatPrecioLabel(pendingFilters.precioMax) : ''}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/\D/g, '')
+                      updatePending({ precioMax: value ? Number(value) : undefined })
+                    }}
+                    className="w-28 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#722F37]/50"
+                  />
+                </div>
+
+                {/* Divider */}
+                <div className="h-8 w-px bg-slate-700" />
+
+                {/* Habitaciones Counter */}
+                <Counter
+                  label="Habitaciones"
+                  value={pendingFilters.habitacionesMin}
+                  min={0}
+                  max={6}
+                  onChange={(val) => updatePending({ habitacionesMin: val })}
+                />
+
+                {/* Divider */}
+                <div className="h-8 w-px bg-slate-700" />
+
+                {/* Baños Counter */}
+                <Counter
+                  label="Baños"
+                  value={pendingFilters.banosMin}
+                  min={0}
+                  max={5}
+                  onChange={(val) => updatePending({ banosMin: val })}
+                />
+
+                {/* Divider */}
+                <div className="h-8 w-px bg-slate-700" />
+
+                {/* Area Range */}
+                <div className="flex items-center gap-3">
+                  <span className="text-sm text-slate-300">Área m²</span>
+                  <input
+                    type="number"
+                    placeholder="Min"
+                    value={pendingFilters.areaMin || ''}
+                    onChange={(e) => updatePending({ areaMin: e.target.value ? Number(e.target.value) : undefined })}
+                    className="w-20 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#722F37]/50"
+                  />
+                  <span className="text-slate-500">-</span>
+                  <input
+                    type="number"
+                    placeholder="Max"
+                    value={pendingFilters.areaMax || ''}
+                    onChange={(e) => updatePending({ areaMax: e.target.value ? Number(e.target.value) : undefined })}
+                    className="w-20 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#722F37]/50"
+                  />
+                </div>
+
+                {/* Reset Filters */}
+                {activeCount > 0 && (
+                  <>
+                    <div className="h-8 w-px bg-slate-700" />
+                    <button
+                      onClick={() => {
+                        setPendingFilters({})
+                        onReset?.()
+                      }}
+                      className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors"
+                    >
+                      <RotateCcw className="w-4 h-4" />
+                      Limpiar filtros
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Mobile Filter Toggle */}
-      <div className="lg:hidden">
+      {/* ========== MOBILE: Collapsible Filter Panel ========== */}
+      <div className="lg:hidden bg-[#1a1a1a] border-b border-slate-800">
         <div className="container mx-auto px-4 py-3">
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className="flex items-center justify-between w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 rounded-lg"
+            className="flex items-center justify-between w-full px-4 py-3 bg-slate-800 rounded-lg"
           >
             <div className="flex items-center gap-2">
-              <SlidersHorizontal className="w-5 h-5 text-slate-600 dark:text-slate-400" />
-              <span className="font-medium text-slate-700 dark:text-slate-300">
-                Filtros
-              </span>
+              <SlidersHorizontal className="w-5 h-5 text-slate-400" />
+              <span className="font-medium text-white">Filtros</span>
               {activeCount > 0 && (
                 <span className="px-2 py-0.5 text-xs font-semibold bg-[#722F37] text-white rounded-full">
                   {activeCount}
@@ -638,7 +521,7 @@ export function FilterBar({
               )}
             </div>
             <ChevronDown
-              className={`w-5 h-5 text-slate-600 dark:text-slate-400 transition-transform ${
+              className={`w-5 h-5 text-slate-400 transition-transform ${
                 isMobileOpen ? 'rotate-180' : ''
               }`}
             />
@@ -648,20 +531,42 @@ export function FilterBar({
         {/* Mobile Filter Panel */}
         {isMobileOpen && (
           <div className="container mx-auto px-4 pb-4 space-y-4">
-            {/* Zonas */}
+            {/* Modalidad Toggle */}
+            <div className="flex rounded-lg overflow-hidden border border-slate-700">
+              <button
+                onClick={() => updatePending({ modalidad: 'venta' })}
+                className={`flex-1 px-4 py-2.5 text-sm font-medium transition-colors ${
+                  pendingFilters.modalidad !== 'arriendo'
+                    ? 'bg-white text-[#1a1a1a]'
+                    : 'bg-transparent text-slate-300'
+                }`}
+              >
+                Venta
+              </button>
+              <button
+                onClick={() => updatePending({ modalidad: 'arriendo' })}
+                className={`flex-1 px-4 py-2.5 text-sm font-medium transition-colors ${
+                  pendingFilters.modalidad === 'arriendo'
+                    ? 'bg-white text-[#1a1a1a]'
+                    : 'bg-transparent text-slate-300'
+                }`}
+              >
+                Arriendo
+              </button>
+            </div>
+
+            {/* Location */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Ubicación
-              </label>
+              <label className="block text-sm font-medium text-slate-300 mb-2">Ubicación</label>
               <div className="flex flex-wrap gap-2">
                 {zonas.slice(0, 6).map((zona) => (
                   <button
                     key={zona.id}
                     onClick={() => toggleZona(zona.id)}
                     className={`px-3 py-1.5 text-sm rounded-lg border transition-colors ${
-                      filtrosActivos.zonaIds?.includes(zona.id)
-                        ? 'border-[#722F37] bg-[#722F37]/5 text-[#722F37]'
-                        : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400'
+                      pendingFilters.zonaIds?.includes(zona.id)
+                        ? 'border-[#722F37] bg-[#722F37]/20 text-white'
+                        : 'border-slate-700 text-slate-300'
                     }`}
                   >
                     {zona.nombre}
@@ -670,49 +575,24 @@ export function FilterBar({
               </div>
             </div>
 
-            {/* Modalidad */}
+            {/* Property Type */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Modalidad
-              </label>
-              <div className="flex gap-2">
-                {filtros.modalidades.map((mod) => (
-                  <button
-                    key={mod.id}
-                    onClick={() =>
-                      updateFilter({
-                        modalidad:
-                          filtrosActivos.modalidad === mod.id
-                            ? undefined
-                            : (mod.id as 'venta' | 'arriendo'),
-                      })
-                    }
-                    className={`flex-1 px-4 py-2.5 text-sm font-medium rounded-lg border transition-colors ${
-                      filtrosActivos.modalidad === mod.id
-                        ? 'border-[#722F37] bg-[#722F37] text-white'
-                        : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400'
-                    }`}
-                  >
-                    {mod.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Tipo */}
-            <div>
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Tipo de propiedad
-              </label>
+              <label className="block text-sm font-medium text-slate-300 mb-2">Tipo de propiedad</label>
               <div className="flex flex-wrap gap-2">
                 {filtros.tipos.map((tipo) => (
                   <button
                     key={tipo.id}
-                    onClick={() => toggleTipo(tipo.id)}
+                    onClick={() => {
+                      const current = pendingFilters.tipos || []
+                      const updated = current.includes(tipo.id)
+                        ? current.filter((id) => id !== tipo.id)
+                        : [...current, tipo.id]
+                      updatePending({ tipos: updated.length ? updated : undefined })
+                    }}
                     className={`px-3 py-1.5 text-sm rounded-lg border transition-colors ${
-                      filtrosActivos.tipos?.includes(tipo.id)
-                        ? 'border-[#722F37] bg-[#722F37]/5 text-[#722F37]'
-                        : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400'
+                      pendingFilters.tipos?.includes(tipo.id)
+                        ? 'border-[#722F37] bg-[#722F37]/20 text-white'
+                        : 'border-slate-700 text-slate-300'
                     }`}
                   >
                     {tipo.label}
@@ -721,11 +601,36 @@ export function FilterBar({
               </div>
             </div>
 
+            {/* Apply Button */}
+            <button
+              onClick={() => {
+                applyFilters()
+                setIsMobileOpen(false)
+              }}
+              className="w-full py-3 bg-white text-[#1a1a1a] font-medium rounded-lg"
+            >
+              Aplicar Filtros
+            </button>
+
+            {/* Save Search - Mobile */}
+            {isLoggedIn && (
+              <button
+                onClick={onGuardarBusqueda}
+                className="w-full flex items-center justify-center gap-2 py-3 bg-[#722F37] text-white font-medium rounded-lg"
+              >
+                <Bookmark className="w-4 h-4" />
+                Guardar Búsqueda
+              </button>
+            )}
+
             {/* Reset */}
             {activeCount > 0 && (
               <button
-                onClick={onReset}
-                className="w-full py-2.5 text-sm font-medium text-[#722F37] border border-[#722F37] rounded-lg hover:bg-[#722F37]/5 transition-colors"
+                onClick={() => {
+                  setPendingFilters({})
+                  onReset?.()
+                }}
+                className="w-full py-2.5 text-sm font-medium text-slate-400 border border-slate-700 rounded-lg"
               >
                 Limpiar todos los filtros
               </button>
@@ -733,6 +638,20 @@ export function FilterBar({
           </div>
         )}
       </div>
+
+      {/* Active Filter Chips */}
+      {activeChips.length > 0 && (
+        <div className="bg-[#F5F2F2] dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+          <div className="container mx-auto px-4 lg:px-6 py-3">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-sm text-slate-500 dark:text-slate-400">Filtros activos:</span>
+              {activeChips.map((chip, index) => (
+                <FilterChip key={index} label={chip.label} onRemove={chip.onRemove} />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

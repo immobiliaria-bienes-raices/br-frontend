@@ -1,0 +1,114 @@
+{
+  "_meta": {
+    "models": {
+      "hero": "Hero section with headline, subheadline, and CTAs for the services page",
+      "valorPropuestas": "Value proposition cards highlighting key service benefits",
+      "pasosProceso": "4-step process timeline showing how we work with property owners",
+      "faqItems": "Frequently asked questions about our services",
+      "contactoCTA": "Contact call-to-action section"
+    }
+  },
+  "hero": {
+    "headline": "Delegue la Gestión de Su Propiedad",
+    "subheadline": "Servicio integral de intermediación inmobiliaria para propietarios que buscan tranquilidad y resultados.",
+    "ctaPrimary": "Contáctenos",
+    "ctaSecondary": "Valorar Propiedad",
+    "backgroundImage": "/mocks/zonas/santa-barbara.jpg"
+  },
+  "valorPropuestas": [
+    {
+      "id": "vp-001",
+      "titulo": "Asesoría Calificada",
+      "descripcion": "Nuestros asesores expertos le guiarán en cada paso del proceso de venta o arriendo de su propiedad.",
+      "icono": "user-check"
+    },
+    {
+      "id": "vp-002",
+      "titulo": "Valoraciones Precisas",
+      "descripcion": "Evaluamos el valor real de su propiedad considerando ubicación, características y tendencias del mercado.",
+      "icono": "calculator"
+    },
+    {
+      "id": "vp-003",
+      "titulo": "Marketing Personalizado",
+      "descripcion": "Estrategias de promoción adaptadas a su propiedad para alcanzar a los compradores ideales.",
+      "icono": "megaphone"
+    },
+    {
+      "id": "vp-004",
+      "titulo": "Red de Compradores",
+      "descripcion": "Acceso a nuestra amplia base de datos de clientes calificados buscando propiedades en Bogotá.",
+      "icono": "users"
+    },
+    {
+      "id": "vp-005",
+      "titulo": "Procesos Transparentes",
+      "descripcion": "Comunicación clara y reportes regulares sobre el estado de su propiedad en el mercado.",
+      "icono": "eye"
+    }
+  ],
+  "pasosProceso": [
+    {
+      "id": "paso-001",
+      "numero": 1,
+      "titulo": "Consulta Inicial",
+      "descripcion": "Nos reunimos con usted para conocer su propiedad, entender sus objetivos y responder todas sus preguntas sobre el proceso.",
+      "imagen": "/mocks/zonas/santa-barbara.jpg"
+    },
+    {
+      "id": "paso-002",
+      "numero": 2,
+      "titulo": "Valoración Profesional",
+      "descripcion": "Realizamos un análisis detallado del mercado y las características de su propiedad para determinar el precio óptimo.",
+      "imagen": "/mocks/zonas/el-retiro.jpg"
+    },
+    {
+      "id": "paso-003",
+      "numero": 3,
+      "titulo": "Marketing y Exhibición",
+      "descripcion": "Promocionamos su propiedad con fotografía profesional, tours virtuales y publicación en los principales portales inmobiliarios.",
+      "imagen": "/mocks/zonas/usaquen.jpg"
+    },
+    {
+      "id": "paso-004",
+      "numero": 4,
+      "titulo": "Cierre Exitoso",
+      "descripcion": "Gestionamos las negociaciones, documentación legal y acompañamos hasta la firma del contrato y entrega de llaves.",
+      "imagen": "/mocks/zonas/santa-barbara.jpg"
+    }
+  ],
+  "faqItems": [
+    {
+      "id": "faq-001",
+      "pregunta": "¿Cuánto tiempo toma vender o arrendar mi propiedad?",
+      "respuesta": "El tiempo varía según el tipo de propiedad, ubicación y precio. En promedio, las propiedades bien valoradas se arriendan en 2-4 semanas y se venden en 2-4 meses. Le mantendremos informado del progreso en todo momento."
+    },
+    {
+      "id": "faq-002",
+      "pregunta": "¿Cuál es el costo de sus servicios?",
+      "respuesta": "Nuestros honorarios son competitivos y se acuerdan al inicio del proceso. Para arriendos, típicamente equivalen a un mes de canon. Para ventas, manejamos un porcentaje del valor de la transacción. Contáctenos para una cotización personalizada."
+    },
+    {
+      "id": "faq-003",
+      "pregunta": "¿Qué incluye el servicio de gestión administrativa?",
+      "respuesta": "Nos encargamos de la elaboración de contratos, verificación de referencias de inquilinos, gestión de pagos mensuales, coordinación de reparaciones y renovaciones de contrato."
+    },
+    {
+      "id": "faq-004",
+      "pregunta": "¿Cómo protegen mi propiedad durante las visitas?",
+      "respuesta": "Todas las visitas son acompañadas por nuestros asesores. Verificamos la identidad de los interesados y coordinamos horarios que sean convenientes para usted."
+    },
+    {
+      "id": "faq-005",
+      "pregunta": "¿Trabajan con propiedades en toda Bogotá?",
+      "respuesta": "Nos especializamos en zonas residenciales del norte de Bogotá como Santa Bárbara, El Retiro, Usaquén, Chapinero Alto y Suba. También manejamos propiedades comerciales en estas áreas."
+    }
+  ],
+  "contactoCTA": {
+    "titulo": "¿Listo para Delegar la Gestión de Su Propiedad?",
+    "subtitulo": "Contáctenos hoy y descubra cómo podemos ayudarle a obtener el máximo valor de su inversión inmobiliaria.",
+    "ctaText": "Contáctenos",
+    "telefono": "+57 (1) 234 5678",
+    "email": "servicios@bienesraices.co"
+  }
+}

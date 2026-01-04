@@ -1,45 +1,50 @@
 # Catálogo de Propiedades Specification
 
 ## Overview
-Property catalog page with Engel & Völkers style grid layout, advanced filtering, and map integration. Allows users to search, filter, and sort properties in Bogotá D.C. Logged-in users can save searches and bookmark favorite properties to their dashboard.
+Property catalog page with Engel & Völkers style sticky filter bar and list layout. Features a dark two-row filter system, property cards with key details, and save search functionality for logged-in users. List view only - no grid or map toggle.
 
 ## User Flows
-- User lands on catalog and sees grid of properties with map view
-- User applies filters (zona, tipo, modalidad, precio, habitaciones, baños, área, parqueadero, características)
-- User sorts results by newest, hottest (best priced), price ascending/descending, or area
+- User lands on catalog and sees list of properties with sticky filter bar
+- User toggles between Venta/Arriendo on primary filter row
+- User searches location via autocomplete input
+- User selects property type from dropdown
+- User expands secondary filters for price range, rooms, baths, area
+- User clicks "Aplicar" to apply filter selections
 - User sees "Nuevo" and "Destacado" badges on qualifying properties
 - User clicks property card to navigate to property details
-- Logged-in user clicks "Guardar Búsqueda" to save current filter combination with custom name
+- Logged-in user clicks "Guardar Búsqueda" button (secondary color) to save current filters
 - Logged-in user clicks heart icon to bookmark property to favorites
-- User accesses dashboard to view saved searches and favorite properties
-- User clicks on map marker to highlight corresponding property card
 - User clears individual filters or resets all filters
+- User sorts results using sort dropdown
 
 ## UI Requirements
-- Filter bar with all Engel & Völkers style filters:
-  - Ubicación/Zona (neighborhood dropdown/autocomplete)
-  - Tipo de Propiedad (Apartamento, Casa, Apartaestudio, Local Comercial)
-  - Modalidad (Venta, Arriendo)
-  - Precio (Min/Max range slider in COP)
-  - Habitaciones (Min: 1, 2, 3, 4+)
-  - Baños (Min: 1, 2, 3+)
-  - Área (Min/Max m² range)
-  - Parqueadero (Con/Sin)
-  - Características (multi-select: Vista, Terraza, Gimnasio, Seguridad 24h, etc.)
-- Collapsible filter bar on mobile
-- Grid layout with property cards showing image, badge, location, price, area, beds, baths
-- Split-screen map view (desktop) or toggle map view (mobile)
-- Google Maps integration showing property markers
+- Sticky horizontal filter bar with dark background (#1a1a1a) and light text
+- **Primary Filter Row (always visible):**
+  - Venta/Arriendo toggle (left)
+  - Location input with autocomplete (center)
+  - Property type dropdown (Apartamento, Casa, Apartaestudio, Local Comercial)
+  - "Más Filtros" expandable button (right)
+- **Secondary Filter Row (expandable):**
+  - Price range: Min/Max inputs in COP
+  - Habitaciones: Increment/decrement buttons (+/-)
+  - Baños: Increment/decrement buttons (+/-)
+  - Área: Number input in m²
+- "Aplicar" button to confirm filter selections
+- "Guardar Búsqueda" button in secondary color (#722F37) with white text
+- LIST layout only - no grid/split/map view toggle
+- Property cards in vertical list showing:
+  - Thumbnail image with badges (Nuevo, Destacado)
+  - Location (zona, localidad)
+  - Title
+  - Price in COP
+  - Specs: bedrooms, bathrooms, area m²
+  - Heart/favorite icon for logged-in users
 - Results count display (e.g., "24 propiedades encontradas")
 - Active filter chips with remove option
-- Sort dropdown: Más recientes (default), Mejores ofertas, Precio menor a mayor, Precio mayor a menor, Área mayor a menor
-- "Nuevo" badge for recently added properties
-- "Destacado" badge for hottest/best-priced properties
-- Heart/bookmark icon on property cards for logged-in users
-- "Guardar Búsqueda" button with modal to name the search (logged-in users)
-- Pagination or infinite scroll for large result sets
+- Sort dropdown: Más recientes, Mejores ofertas, Precio menor a mayor, Precio mayor a menor, Área mayor a menor
+- Pagination at bottom
+- Collapsible filters on mobile
 - Empty state when no properties match filters
-- Responsive design with mobile-first approach
 
 ## Configuration
 - shell: true

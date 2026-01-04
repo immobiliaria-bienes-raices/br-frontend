@@ -76,6 +76,10 @@ export interface Hero {
   ctaText: string
   ctaSecondary: string
   backgroundImage: string
+  /** Background videos for auto-sliding hero (optional, overrides backgroundImage) */
+  backgroundVideos?: string[]
+  /** Duration in seconds to display each video before transitioning */
+  videoTransitionDuration?: number
   logo: string
 }
 

@@ -1,6 +1,7 @@
 'use client'
 
 import type { PaginaDeInicioProps } from '@/../product/sections/pagina-de-inicio/types'
+import { Header } from './Header'
 import { HeroSection } from './HeroSection'
 import { EquipoSection } from './EquipoSection'
 import { PropiedadCard } from './PropiedadCard'
@@ -35,6 +36,14 @@ export function PaginaDeInicio({
 }: PaginaDeInicioProps) {
   return (
     <div className="min-h-screen bg-[#F5F2F2] dark:bg-slate-900">
+      {/* Header - Overlays on Hero */}
+      <Header
+        logo={hero.logo}
+        onExplorarPropiedades={onExplorarPropiedades}
+        onVerServicios={onVerServicios}
+        onContactar={onContactar}
+      />
+
       {/* Hero Section */}
       <HeroSection
         hero={hero}
